@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:modares/core/network/service_locator.dart';
+import 'package:modares/features/splash/view.dart';
+import 'package:modares/l10n/app_localizations.dart';
+import 'package:modares/provider/lang_provider.dart';
+import 'package:provider/provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  // Dio.initDio();
+  setupServiceLocator();
+  final localeProvider = LocaleProvider();
+  await localeProvider.loadLocale();
+
+  runApp(
+    ChangeNotifierProvider(create: (_) => localeProvider, child: const MyApp()),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<LocaleProvider>(context);
+
+    return MaterialApp(
+      locale: provider.locale,
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      debugShowCheckedModeBanner: false,
+      home: const Splash(),
+    );
+  }
+}
