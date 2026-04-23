@@ -43,11 +43,9 @@ class _CustomPasswordState extends State<CustomPassword> {
             ? Icon(Icons.remove_red_eye, color: AppColor.mainGray)
             : Icon(Icons.visibility_off, color: AppColor.mainGray),
       ),
-      isObsecure: isObscure,
+      isObscure: isObscure,
       controller: widget.controller,
       validation: widget.validation?? (value) => AppValidation.password(context, value),
-      borderColor: widget.borderColor,
-      textColor: widget.textColor,
       keyboard: TextInputType.visiblePassword,
       errorText: widget.errorText,
     );

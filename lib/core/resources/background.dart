@@ -71,8 +71,8 @@ const _els = [
 ];
 
 const _atoms = [
-  _AtomData(id: "atom1", x: 80, y: 200, nucleus: 12, rx: 50, ry: 20, opacity: .2, spinDur: null),
-  _AtomData(id: "atom2", x: 570, y: 120, nucleus: 14, rx: 60, ry: 24, opacity: .25, spinDur: 4),
+  _AtomData(id: "atom1", x: 80, y: 200, nucleus: 6, rx: 30, ry: 10, opacity: .2, spinDur: 6),
+  _AtomData(id: "atom2", x: 570, y: 120, nucleus: 10, rx: 40, ry: 15, opacity: .25, spinDur: 4),
   _AtomData(id: "atom3", x: 620, y: 340, nucleus: 10, rx: 40, ry: 14, opacity: .2, spinDur: 6, reverse: true),
 ];
 

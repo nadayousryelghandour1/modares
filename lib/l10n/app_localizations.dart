@@ -95,6 +95,18 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
+  /// No description provided for @logo.
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get logo;
+
+  /// No description provided for @website_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Modares'**
+  String get website_name;
+
   /// No description provided for @login_title.
   ///
   /// In en, this message translates to:
@@ -388,6 +400,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your academic year'**
   String get stage_error;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @exploreTeachers.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Teachers'**
+  String get exploreTeachers;
+
+  /// No description provided for @exploreCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Courses'**
+  String get exploreCourses;
+
+  /// No description provided for @messages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messages;
+
+  /// No description provided for @ongoingCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing Courses'**
+  String get ongoingCourses;
+
+  /// No description provided for @trackProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your learning progress'**
+  String get trackProgress;
+
+  /// No description provided for @seeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get seeAll;
+
+  /// No description provided for @welcomeHeaderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {name}'**
+  String welcomeHeaderTitle(Object name);
+
+  /// No description provided for @welcomeHeaderDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours a day thanks to educational tracking'**
+  String get welcomeHeaderDescription;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @mathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Mathematics'**
+  String get mathematics;
+
+  /// No description provided for @science.
+  ///
+  /// In en, this message translates to:
+  /// **'Science'**
+  String get science;
+
+  /// No description provided for @socialStudies.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Studies'**
+  String get socialStudies;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @physics.
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get physics;
+
+  /// No description provided for @chemistry.
+  ///
+  /// In en, this message translates to:
+  /// **'Chemistry'**
+  String get chemistry;
+
+  /// No description provided for @biology.
+  ///
+  /// In en, this message translates to:
+  /// **'Biology'**
+  String get biology;
+
+  /// No description provided for @pureMathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Pure Mathematics'**
+  String get pureMathematics;
+
+  /// No description provided for @appliedMathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Applied Mathematics'**
+  String get appliedMathematics;
+
+  /// No description provided for @philosophy.
+  ///
+  /// In en, this message translates to:
+  /// **'Philosophy'**
+  String get philosophy;
+
+  /// No description provided for @psychology.
+  ///
+  /// In en, this message translates to:
+  /// **'Psychology'**
+  String get psychology;
+
+  /// No description provided for @geography.
+  ///
+  /// In en, this message translates to:
+  /// **'Geography'**
+  String get geography;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @noCoursesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, there are currently no enrolled courses'**
+  String get noCoursesTitle;
+
+  /// No description provided for @noCoursesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'It looks like you have not started your learning journey with us yet. Explore our wide range of curricula and outstanding teachers, and start learning now!'**
+  String get noCoursesDescription;
+
+  /// No description provided for @noCoursesBrowseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Courses and Curricula'**
+  String get noCoursesBrowseButton;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back, Scholar'**
+  String get welcome;
+
+  /// No description provided for @desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your academic journey continues here.'**
+  String get desc;
+
+  /// No description provided for @subjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Subjects'**
+  String get subjects;
+
+  /// No description provided for @units.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing Units'**
+  String get units;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:modares/bloc/auth/auth_bloc.dart';
+import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/api/api_consumer.dart';
 import 'package:modares/core/network/api/api_intercepotrs.dart';
 import 'package:modares/core/network/api/dio_consumer.dart';
@@ -37,5 +38,9 @@ void setupServiceLocator() {
 
   getIt.registerLazySingleton<AuthBloc>(
     () => AuthBloc(),
+  );
+
+  getIt.registerLazySingleton<TeacherSearchBloc>(
+    () => TeacherSearchBloc(),
   );
 }

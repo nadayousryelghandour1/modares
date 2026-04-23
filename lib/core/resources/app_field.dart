@@ -7,22 +7,20 @@ class AppField extends StatefulWidget {
     required this.title,
     required this.hint,
     this.icon = const SizedBox.shrink(),
-    this.isObsecure = false,
+    this.isObscure = false,
     this.controller,
     this.validation,
-    this.borderColor,
-    this.textColor,
     this.keyboard,
     this.errorText,
+    this.preIcon = const SizedBox.shrink(),
   });
   final String title;
   final String hint;
-  final bool isObsecure;
+  final bool isObscure;
   final Widget icon;
+  final Widget preIcon;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validation;
-  final Color? borderColor;
-  final Color? textColor;
   final TextInputType? keyboard;
   final String? errorText;
   @override
@@ -47,7 +45,7 @@ class _AppFieldState extends State<AppField> {
         const SizedBox(height: 10),
         TextFormField(
           controller: widget.controller,
-          obscureText: widget.isObsecure,
+          obscureText: widget.isObscure,
           keyboardType: widget.keyboard ?? TextInputType.name,
           style: TextStyle(
             fontFamily: 'Cairo',
@@ -59,6 +57,7 @@ class _AppFieldState extends State<AppField> {
             errorText: widget.errorText,
             suffixIcon: widget.icon,
             suffixIconColor: AppColor.mainGray,
+            suffixIconConstraints: BoxConstraints(maxHeight: 40, maxWidth: 40),
             focusColor: AppColor.primaryTextColor,
             hint: Text(
               widget.hint,
@@ -72,17 +71,14 @@ class _AppFieldState extends State<AppField> {
             filled: true,
             fillColor: Colors.white,
             focusedBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
+              borderSide: BorderSide(
                 color: AppColor.primaryTextColor,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(15),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: Colors.transparent,
-                width: 2,
-              ),
+              borderSide: BorderSide(color: Colors.transparent, width: 2),
               borderRadius: BorderRadius.circular(15),
             ),
             errorBorder: OutlineInputBorder(

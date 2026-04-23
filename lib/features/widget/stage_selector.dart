@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:modares/core/resources/app_color.dart';
-import 'package:modares/core/resources/app_validation.dart';
 import 'package:modares/l10n/app_localizations.dart';
 
 enum StudentStage {

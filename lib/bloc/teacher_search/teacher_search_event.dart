@@ -1,41 +1,56 @@
-// part of 'teacher_search_bloc.dart';
+part of 'teacher_search_bloc.dart';
 
-// @immutable
-// abstract class TeacherSearchEvent {}
+@immutable
+abstract class TeacherSearchEvent {}
 
-// class SetCourse extends TeacherSearchEvent {
-//   final String course;
-//   SetCourse(this.course);
-// }
+/// 📥 تحميل أولي
+class GetAllTeacher extends TeacherSearchEvent {
+  GetAllTeacher();
+}
 
-// class SetLearningMethod extends TeacherSearchEvent {
-//   final String learningMethod;
-//   SetLearningMethod(this.learningMethod);
-// }
+/// 🎯 اختيار المادة
+class SetSubject extends TeacherSearchEvent {
+  final String subject;
+  SetSubject(this.subject);
+}
 
-// class SetGovernorate extends TeacherSearchEvent {
-//   final String governorate;
-//   SetGovernorate(this.governorate);
-// }
+/// 🎯 اختيار طريقة التدريس (online / offline / all)
+class SetLearningMethod extends TeacherSearchEvent {
+  final String learningMethod;
+  SetLearningMethod(this.learningMethod);
+}
 
-// class SetTeacherName extends TeacherSearchEvent {
-//   final String teacherName;
-//   SetTeacherName(this.teacherName);
-// }
+/// 🎯 اختيار المحافظة
+class SetGovernorate extends TeacherSearchEvent {
+  final String governorate;
+  SetGovernorate(this.governorate);
+}
 
-// class SetSortBy extends TeacherSearchEvent {
-//   final String sortBy;
-//   SetSortBy(this.sortBy);
-// }
+/// 🔍 البحث بالاسم
+class SetTeacherName extends TeacherSearchEvent {
+  final String teacherName;
+  SetTeacherName(this.teacherName);
+}
 
-// class SetPage extends TeacherSearchEvent {
-//   final int page;
-//   SetPage(this.page);
-// }
+/// 📊 ترتيب (price / rating)
+class SetSortBy extends TeacherSearchEvent {
+  final String sortBy;
 
-// class SetStudentLevel extends TeacherSearchEvent {
-//   final String studentLevel;
-//   SetStudentLevel(this.studentLevel);
-// }
+  SetSortBy({required this.sortBy});
+}
 
-// class ResetFilters extends TeacherSearchEvent {}
+/// 🎓 المرحلة الدراسية
+class SetStudentLevel extends TeacherSearchEvent {
+  final String studentLevel;
+  SetStudentLevel(this.studentLevel);
+}
+
+/// ✅ تطبيق الفلاتر (API call)
+class ApplyFilters extends TeacherSearchEvent {
+  ApplyFilters();
+}
+
+/// 🔄 إعادة تعيين الفلاتر
+class ResetFilters extends TeacherSearchEvent {
+  ResetFilters();
+}

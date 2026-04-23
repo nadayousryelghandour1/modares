@@ -10,6 +10,16 @@ import 'package:modares/model/auth_model.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
+handelStage(grade) {
+  if (grade >= 1 && grade <= 6) {
+    return '1';
+  } else if (grade >= 7 && grade <= 9) {
+    return '2';
+  } else {
+    return '4';
+  }
+}
+
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ApiConsumer api;
 
@@ -68,6 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         final user = AuthModel.fromJson(response);
         CacheHelper.saveToken(user.token);
+        CacheHelper.saveUser(user.user);
         emit(SignUpSuccess());
       } on ServerException catch (e) {
         emit(

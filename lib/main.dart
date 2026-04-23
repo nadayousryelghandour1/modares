@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:modares/core/network/service_locator.dart';
+import 'package:modares/features/Search/view.dart';
+import 'package:modares/features/bottom_nav_bar/view.dart';
+import 'package:modares/features/home/view.dart';
 import 'package:modares/features/splash/view.dart';
+import 'package:modares/features/widget/stage_selector.dart';
 import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/provider/lang_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +13,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  // Dio.initDio();
+  // DioHzz.initDio();
   setupServiceLocator();
   final localeProvider = LocaleProvider();
   await localeProvider.loadLocale();
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      home: const Splash(),
+      home:  Splash(),
     );
   }
 }

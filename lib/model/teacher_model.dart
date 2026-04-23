@@ -1,42 +1,33 @@
 class TeacherModel {
   final int id;
   final String name;
-  final String title;
-  final String image;
-  final double rate;
-  final List<String> teachingMethods;
-  final String location;
-  final int price;
-  final List<int> stage;
-  final Map<String, String> grades;
+  final String? image;
+  final double rating;
+  final int teachingMethod;
+  final String? government;
+  final List<String> subjects;
 
   TeacherModel({
     required this.id,
     required this.name,
-    required this.title,
-    required this.image,
-    required this.rate,
-    required this.teachingMethods,
-    required this.location,
-    required this.price,
-    required this.stage,
-    required this.grades,
+    this.image,
+    required this.rating,
+    required this.teachingMethod,
+    this.government,
+    required this.subjects,
   });
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) {
     return TeacherModel(
-      id: json['id'],
-      name: json['name'],
-      title: json['title'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? "",
       image: json['image'],
-      rate: (json['rate'] as num).toDouble(),
-      teachingMethods: List<String>.from(json['teachingMethods']),
-      location: json['location'],
-      price: json['price'],
-      stage: List<int>.from(json['stage']),
-      grades: Map<String, String>.from(json['grades']),
+      rating: (json['rating'] ?? 0).toDouble(),
+      teachingMethod: json['teachingMethod'] ?? 0,
+      government: json['government'],
+      subjects: (json['subjects'] as List? ?? [])
+          .map((e) => e.toString())
+          .toList(),
     );
   }
-
-
 }

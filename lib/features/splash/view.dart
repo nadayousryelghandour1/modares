@@ -2,7 +2,6 @@
 
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
-import 'package:modares/core/resources/cache_helper.dart';
 // import 'package:final_app/features/bottom_nav_bar/view.dart';
 import 'package:modares/features/login/view.dart';
 import 'package:flutter/material.dart';

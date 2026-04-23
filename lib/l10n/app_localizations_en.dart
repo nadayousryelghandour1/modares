@@ -9,6 +9,12 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get logo => 'M';
+
+  @override
+  String get website_name => 'Modares';
+
+  @override
   String get login_title => 'Welcome back';
 
   @override
@@ -154,4 +160,96 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stage_error => 'Please enter your academic year';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get exploreTeachers => 'Explore Teachers';
+
+  @override
+  String get exploreCourses => 'Explore Courses';
+
+  @override
+  String get messages => 'Messages';
+
+  @override
+  String get ongoingCourses => 'Ongoing Courses';
+
+  @override
+  String get trackProgress => 'Track your learning progress';
+
+  @override
+  String get seeAll => 'See all';
+
+  @override
+  String welcomeHeaderTitle(Object name) {
+    return 'Welcome, $name';
+  }
+
+  @override
+  String get welcomeHeaderDescription => 'Hours a day thanks to educational tracking';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get mathematics => 'Mathematics';
+
+  @override
+  String get science => 'Science';
+
+  @override
+  String get socialStudies => 'Social Studies';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get physics => 'Physics';
+
+  @override
+  String get chemistry => 'Chemistry';
+
+  @override
+  String get biology => 'Biology';
+
+  @override
+  String get pureMathematics => 'Pure Mathematics';
+
+  @override
+  String get appliedMathematics => 'Applied Mathematics';
+
+  @override
+  String get philosophy => 'Philosophy';
+
+  @override
+  String get psychology => 'Psychology';
+
+  @override
+  String get geography => 'Geography';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get noCoursesTitle => 'Sorry, there are currently no enrolled courses';
+
+  @override
+  String get noCoursesDescription => 'It looks like you have not started your learning journey with us yet. Explore our wide range of curricula and outstanding teachers, and start learning now!';
+
+  @override
+  String get noCoursesBrowseButton => 'Browse Courses and Curricula';
+
+  @override
+  String get welcome => 'Welcome back, Scholar';
+
+  @override
+  String get desc => 'Your academic journey continues here.';
+
+  @override
+  String get subjects => 'Subjects';
+
+  @override
+  String get units => 'Ongoing Units';
 }

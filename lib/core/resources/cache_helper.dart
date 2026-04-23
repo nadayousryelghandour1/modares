@@ -3,6 +3,7 @@
 // ignore: unused_import
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:modares/model/user_model.dart';
 
 class CacheHelper {
   static const storage = FlutterSecureStorage(
@@ -18,21 +19,30 @@ class CacheHelper {
     return await storage.write(key: 'token', value: token);
   }
 
-  static Future<void> delete() async {
-    return await storage.delete(key: 'token');
+  static Future<String> getUser() async {
+    return await storage.read(key: 'user') ?? "";
   }
 
-  static Future<String> getId() async {
-    return await storage.read(key: 'id') ?? "";
+  static Future<void> saveUser(UserModel user) async {
+    String jsonString = jsonEncode(user);
+    return await storage.write(key: 'user', value: jsonString);
   }
 
-  static Future<void> saveId(int id) async {
-    return await storage.write(key: 'id', value: id.toString());
-  }
+  // static Future<void> delete() async {
+  //   return await storage.delete(key: 'token');
+  // }
 
-  static Future<void> deleteId() async {
-    return await storage.delete(key: 'id');
-  }
+  // static Future<String> getId() async {
+  //   return await storage.read(key: 'id') ?? "";
+  // }
+
+  // static Future<void> saveName(int id) async {
+  //   return await storage.write(key: 'id', value: id.toString());
+  // }
+
+  // static Future<void> deleteId() async {
+  //   return await storage.delete(key: 'id');
+  // }
 
   // static Future<List<ProductModel>> getCart() async {
   //   final data = await storage.read(key: 'cart');
