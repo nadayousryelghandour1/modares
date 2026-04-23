@@ -13,6 +13,7 @@ import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/app_validation.dart';
 import 'package:modares/core/resources/background.dart';
 import 'package:modares/core/resources/snack_bar.dart';
+import 'package:modares/features/bottom_nav_bar/view.dart';
 import 'package:modares/features/widget/custom_password.dart';
 import 'package:modares/features/widget/stage_selector.dart';
 import 'package:modares/l10n/app_localizations.dart';
@@ -42,9 +43,9 @@ class SignUp extends StatelessWidget {
               type: AnimatedSnackBarType.success,
               context: context,
             );
-            // Navigator.of(
-            //   context,
-            // ).pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+            Navigator.of(
+              context,
+            ).pushReplacement(MaterialPageRoute(builder: (context) => Home()));
           }
         },
         builder: (context, state) {

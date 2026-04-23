@@ -12,6 +12,7 @@ import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/app_validation.dart';
 import 'package:modares/core/resources/background.dart';
 import 'package:modares/core/resources/snack_bar.dart';
+import 'package:modares/features/bottom_nav_bar/view.dart';
 import 'package:modares/features/signup/view.dart';
 import 'package:modares/features/widget/checkbox.dart';
 import 'package:modares/features/widget/custom_password.dart';
@@ -56,9 +57,9 @@ class Login extends StatelessWidget {
                   type: AnimatedSnackBarType.success,
                   context: context,
                 );
-                // Navigator.of(context).pushReplacement(
-                //   MaterialPageRoute(builder: (context) => Home()),
-                // );
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
               }
             },
             builder: (context, state) {
