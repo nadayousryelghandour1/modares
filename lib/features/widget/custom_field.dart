@@ -5,13 +5,14 @@ class CustomField extends StatelessWidget {
   const CustomField({
     super.key,
     required this.hint,
+    required this.onChange,
     this.icon = const SizedBox.shrink(),
     this.controller,
     this.keyboard,
     this.preIcon = const SizedBox.shrink(),
   });
   final String hint;
-
+ final Function(String)? onChange;
   final Widget icon;
   final Widget preIcon;
   final TextEditingController? controller;
@@ -52,6 +53,7 @@ class CustomField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
       ),
+      onChanged: onChange,
     );
   }
 }

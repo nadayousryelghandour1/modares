@@ -2,7 +2,8 @@ class EndPoints {
   static const String baseUrl = 'https://modares.runasp.net/';
   static const String login = 'auth/login';
   static const String register = 'auth/register';
-  static const String getTeacher ='/teacher/get-all-cards';
+  static const String getTeacher = '/teacher/get-all-cards';
+  static const String getProfile = "student/";
   // static const String confirmEmailResand = '/Auth/resend-confirmation-email';
   // static const String refreshToken = '/Auth/refresh' ;
   // static const String forgetPassword = '/Auth/request-password-reset';

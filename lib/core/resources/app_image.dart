@@ -7,6 +7,7 @@ class AppImage {
   static const personIcon = 'assets/icon/person_icon.svg';
   static const starIcon = 'assets/icon/star.svg';
   static const container = 'assets/images/container.png';
+  static const noMatch = 'assets/icon/no_match.svg';
   ///////
   // static const test1 = 'assets/image/p1.png';
   // static const test2 = 'assets/image/p2.png';

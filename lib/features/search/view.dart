@@ -5,11 +5,13 @@ import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
+import 'package:modares/features/filter_dialog.dart';
 import 'package:modares/features/search/skeleton.dart';
-
 import 'package:modares/features/widget/custom_field.dart';
+import 'package:modares/features/widget/no_match.dart';
 import 'package:modares/features/widget/search_Item.dart';
 import 'package:modares/features/widget/search_bar.dart';
+import 'package:modares/l10n/app_localizations.dart';
 
 class TeacherSearchPage extends StatefulWidget {
   const TeacherSearchPage({super.key});
@@ -19,15 +21,13 @@ class TeacherSearchPage extends StatefulWidget {
 }
 
 class _TeacherSearchPageState extends State<TeacherSearchPage> {
-  // final TextEditingController _searchController = TextEditingController();
-
   String selectedGovernorate = "";
   String selectedCourse = "";
   String selectedMethod = "all";
+  final TeacherSearchBloc bloc = getIt<TeacherSearchBloc>();
 
   @override
   Widget build(BuildContext context) {
-    final TeacherSearchBloc bloc = getIt<TeacherSearchBloc>();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(top: 32),
@@ -42,7 +42,12 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
                 children: [
                   Expanded(
                     child: CustomField(
-                      hint: "Search by Teacher Name",
+                      hint: AppLocalizations.of(context)!.searchTeacherNameHint,
+                      controller: getIt<TeacherSearchBloc>().teacherName,
+                      keyboard: TextInputType.webSearch,
+                      onChange: (val) {
+                        getIt<TeacherSearchBloc>().add(ApplyFilters());
+                      },
                       icon: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: SvgPicture.asset(
@@ -80,15 +85,21 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
               bloc: bloc,
               builder: (context, state) {
                 print("=================================$state");
-                if (state is TeacherLoadedSuccess) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: state.teachers.length,
-                      itemBuilder: (context, index) {
-                        return SearchItem(teacher: state.teachers[index]);
-                      },
-                    ),
-                  );
+                if (state is TeacherSearchLoaded) {
+                  if (state.displayedTeachers.isNotEmpty) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: state.displayedTeachers.length,
+                        itemBuilder: (context, index) {
+                          return SearchItem(
+                            teacher: state.displayedTeachers[index],
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return NoMatch();
+                  }
                 } else if (state is TeacherSearchError) {}
                 return Expanded(
                   child: ListView.builder(
@@ -104,61 +115,16 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
     );
   }
 
-  void _openFilterDialog(BuildContext context) {
+  void _openFilterDialog(BuildContext context) async {
     showDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("اختيار الفلاتر"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DropdownButtonFormField<String>(
-                value: selectedGovernorate.isEmpty ? null : selectedGovernorate,
-                hint: const Text("اختر المحافظة"),
-                items: ["القاهرة", "بورسعيد", "الإسكندرية"]
-                    .map((g) => DropdownMenuItem(value: g, child: Text(g)))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => selectedGovernorate = value ?? "");
-                },
-              ),
-              DropdownButtonFormField<String>(
-                value: selectedCourse.isEmpty ? null : selectedCourse,
-                hint: const Text("اختر المادة"),
-                items: ["رياضيات", "لغة عربية", "إنجليزي"]
-                    .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => selectedCourse = value ?? "");
-                },
-              ),
-              DropdownButtonFormField<String>(
-                value: selectedMethod,
-                items: ["all", "online", "offline"]
-                    .map((m) => DropdownMenuItem(value: m, child: Text(m)))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => selectedMethod = value ?? "all");
-                },
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              child: const Text("إلغاء"),
-              onPressed: () => Navigator.pop(context),
-            ),
-            ElevatedButton(
-              child: const Text("تطبيق"),
-              onPressed: () {
-                // هنا تبعتي Event للـ Bloc مع الفلاتر الجديدة
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
+      builder: (_) => FilterDialog(
+        initial: FilterOptions(
+          governorate: bloc.government,
+          teachingMethod: bloc.learningMethod,
+          sortBy: bloc.sortBy ?? 2,
+        ),
+      ),
     );
   }
 }

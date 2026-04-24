@@ -443,6 +443,18 @@ abstract class AppLocalizations {
   /// **'See all'**
   String get seeAll;
 
+  /// No description provided for @searchTeacherNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Teacher Name'**
+  String get searchTeacherNameHint;
+
+  /// No description provided for @noMatchFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry No Match Found'**
+  String get noMatchFound;
+
   /// No description provided for @welcomeHeaderTitle.
   ///
   /// In en, this message translates to:
@@ -580,6 +592,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ongoing Units'**
   String get units;
+
+  /// No description provided for @governorate_cairo.
+  ///
+  /// In en, this message translates to:
+  /// **'Cairo'**
+  String get governorate_cairo;
+
+  /// No description provided for @governorate_alexandria.
+  ///
+  /// In en, this message translates to:
+  /// **'Alexandria'**
+  String get governorate_alexandria;
+
+  /// No description provided for @governorate_portSaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Port Said'**
+  String get governorate_portSaid;
+
+  /// No description provided for @governorate_suez.
+  ///
+  /// In en, this message translates to:
+  /// **'Suez'**
+  String get governorate_suez;
+
+  /// No description provided for @governorate_beheira.
+  ///
+  /// In en, this message translates to:
+  /// **'Beheira'**
+  String get governorate_beheira;
+
+  /// No description provided for @governorate_daqahliya.
+  ///
+  /// In en, this message translates to:
+  /// **'Daqahliya'**
+  String get governorate_daqahliya;
+
+  /// No description provided for @governorate_damietta.
+  ///
+  /// In en, this message translates to:
+  /// **'Damietta'**
+  String get governorate_damietta;
+
+  /// No description provided for @governorate_gharbiya.
+  ///
+  /// In en, this message translates to:
+  /// **'Gharbiya'**
+  String get governorate_gharbiya;
+
+  /// No description provided for @governorate_kafrElSheikh.
+  ///
+  /// In en, this message translates to:
+  /// **'Kafr El Sheikh'**
+  String get governorate_kafrElSheikh;
+
+  /// No description provided for @governorate_monufia.
+  ///
+  /// In en, this message translates to:
+  /// **'Monufia'**
+  String get governorate_monufia;
+
+  /// No description provided for @governorate_qalyubia.
+  ///
+  /// In en, this message translates to:
+  /// **'Qalyubia'**
+  String get governorate_qalyubia;
+
+  /// No description provided for @governorate_sharqiya.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharqiya'**
+  String get governorate_sharqiya;
+
+  /// No description provided for @governorate_ismailia.
+  ///
+  /// In en, this message translates to:
+  /// **'Ismailia'**
+  String get governorate_ismailia;
+
+  /// No description provided for @governorate_asyut.
+  ///
+  /// In en, this message translates to:
+  /// **'Asyut'**
+  String get governorate_asyut;
+
+  /// No description provided for @governorate_aswan.
+  ///
+  /// In en, this message translates to:
+  /// **'Aswan'**
+  String get governorate_aswan;
+
+  /// No description provided for @governorate_beniSuef.
+  ///
+  /// In en, this message translates to:
+  /// **'Beni Suef'**
+  String get governorate_beniSuef;
+
+  /// No description provided for @governorate_fayoum.
+  ///
+  /// In en, this message translates to:
+  /// **'Fayoum'**
+  String get governorate_fayoum;
+
+  /// No description provided for @governorate_giza.
+  ///
+  /// In en, this message translates to:
+  /// **'Giza'**
+  String get governorate_giza;
+
+  /// No description provided for @governorate_luxor.
+  ///
+  /// In en, this message translates to:
+  /// **'Luxor'**
+  String get governorate_luxor;
+
+  /// No description provided for @governorate_minya.
+  ///
+  /// In en, this message translates to:
+  /// **'Minya'**
+  String get governorate_minya;
+
+  /// No description provided for @governorate_qena.
+  ///
+  /// In en, this message translates to:
+  /// **'Qena'**
+  String get governorate_qena;
+
+  /// No description provided for @governorate_sohag.
+  ///
+  /// In en, this message translates to:
+  /// **'Sohag'**
+  String get governorate_sohag;
+
+  /// No description provided for @governorate_matrouh.
+  ///
+  /// In en, this message translates to:
+  /// **'Matrouh'**
+  String get governorate_matrouh;
+
+  /// No description provided for @governorate_newValley.
+  ///
+  /// In en, this message translates to:
+  /// **'New Valley'**
+  String get governorate_newValley;
+
+  /// No description provided for @governorate_redSea.
+  ///
+  /// In en, this message translates to:
+  /// **'Red Sea'**
+  String get governorate_redSea;
+
+  /// No description provided for @governorate_northSinai.
+  ///
+  /// In en, this message translates to:
+  /// **'North Sinai'**
+  String get governorate_northSinai;
+
+  /// No description provided for @governorate_southSinai.
+  ///
+  /// In en, this message translates to:
+  /// **'South Sinai'**
+  String get governorate_southSinai;
+
+  /// No description provided for @filterDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter results'**
+  String get filterDialogTitle;
+
+  /// No description provided for @filterDialogReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get filterDialogReset;
+
+  /// No description provided for @governorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorate'**
+  String get governorate;
+
+  /// No description provided for @chooseGovernorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose governorate'**
+  String get chooseGovernorate;
+
+  /// No description provided for @teachingMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Teaching method'**
+  String get teachingMethod;
+
+  /// No description provided for @online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
+  /// No description provided for @offline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get offline;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sortBy;
+
+  /// No description provided for @newest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get newest;
+
+  /// No description provided for @topRated.
+  ///
+  /// In en, this message translates to:
+  /// **'Top rated'**
+  String get topRated;
+
+  /// No description provided for @priceHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Price high'**
+  String get priceHigh;
+
+  /// No description provided for @priceLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Price low'**
+  String get priceLow;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @profileButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

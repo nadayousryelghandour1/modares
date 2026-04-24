@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_field.dart';
-import 'package:modares/core/resources/app_validation.dart';
 import 'package:modares/l10n/app_localizations.dart';
 
 class SelectRoleScreen extends StatelessWidget {

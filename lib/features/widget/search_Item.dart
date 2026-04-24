@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_text_style.dart';
+import 'package:modares/features/teacher_details/view.dart';
+import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/model/teacher_model.dart';
 
 class SearchItem extends StatelessWidget {
@@ -40,7 +42,17 @@ class SearchItem extends StatelessWidget {
             // Avatar
             Stack(
               children: [
-                CircleAvatar(radius: 50, child: Image.network(teacher.image??AppImage.personIcon),),
+                ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(100),
+                  child: CircleAvatar(
+                    radius: 50,
+                    child: Image.network(
+                      teacher.image ??
+                          "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 0,
                   child: Container(
@@ -85,7 +97,7 @@ class SearchItem extends StatelessWidget {
                     child: Row(
                       children: teacher.subjects.asMap().entries.map((entry) {
                         final isLast = entry.key == teacher.subjects.length - 1;
-                    
+
                         return Text(
                           isLast ? entry.value : "${entry.value} • ",
                           style: AppTextStyle.secondaryStyle,
@@ -97,7 +109,13 @@ class SearchItem extends StatelessWidget {
                   SizedBox(height: 2),
 
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TeacherDetails(),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 40,
                       padding: EdgeInsets.symmetric(
@@ -110,7 +128,7 @@ class SearchItem extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "الملف الشخصي",
+                          AppLocalizations.of(context)!.profileButton,
                           style: AppTextStyle.primaryButtonStyle.copyWith(
                             fontSize: 18,
                           ),

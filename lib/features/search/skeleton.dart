@@ -6,60 +6,83 @@ class TeacherCardShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.15,
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.white,
+      ),
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,
-        child: Container(
-          height: 120,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(height: 16, width: 140, color: Colors.white),
-                    const SizedBox(height: 10),
-                    Container(height: 14, width: 100, color: Colors.white),
-                    const Spacer(),
-                    Container(
-                      height: 35,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Avatar
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.grey,
+            ),
 
-              const SizedBox(width: 16),
+            const SizedBox(width: 16),
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            // Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Name
                   Container(
-                    height: 70,
-                    width: 70,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
+                    height: 16,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
+
                   const SizedBox(height: 10),
-                  Container(height: 12, width: 50, color: Colors.white),
+
+                  // Subjects
+                  Row(
+                    children: [
+                      _line(60),
+                      const SizedBox(width: 6),
+                      _line(40),
+                      const SizedBox(width: 6),
+                      _line(50),
+                    ],
+                  ),
+
+                  const Spacer(),
+
+                  // Button
+                  Container(
+                    height: 40,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _line(double width) {
+    return Container(
+      height: 12,
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(6),
       ),
     );
   }

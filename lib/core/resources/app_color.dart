@@ -6,7 +6,7 @@ class AppColor {
   static const primeryColorDark = Color(0xff0F172A);
   static const secondaryLoginButtonColor = Color(0xffd5d7ff);
   static const mainWhite = Color(0xffF1F5F9);
-  static const mainGray = Color(0xffb3becd);
+  static const mainGray = Color.fromARGB(255, 144, 154, 169);
   static const mainGold = Color(0xffFFDDB3);
   static const primaryTextColor = Color(0xff1E293B);
   static const mainBackground = Color(0xffF8FAFC);

@@ -1,5 +1,6 @@
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:modares/bloc/profile/profile_bloc.dart';
 import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
@@ -29,20 +30,21 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  bool isLoaded = false;
-
   void _onItemTapped(int index) {
     setState(() {
       indexing = index;
     });
 
-    if (index == 1 && !isLoaded) {
-      getIt<TeacherSearchBloc>().add(GetAllTeacher());
-      isLoaded = true;
+    if (index == 1) {
+      getIt<TeacherSearchBloc>().add(ApplyFilters());
+    }
+
+    if (index == 2) {
+      getIt<ProfileBloc>().add(GatProfileEvent());
     }
   }
 
-  List<Widget> screens = [StudentHome(), TeacherSearchPage(),Profile()];
+  List<Widget> screens = [StudentHome(), TeacherSearchPage(), Profile()];
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +93,9 @@ class _HomeState extends State<Home> {
                 BlendMode.srcIn,
               ),
             ),
-            label: "Explore",
+            label: "Account",
             labelStyle: TextStyle(
-              color: indexing == 1 ? Colors.white : Color(0xff001F3F),
+              color: indexing == 2 ? Colors.white : Color(0xff001F3F),
             ),
           ),
           // CurvedNavigationBarItem(

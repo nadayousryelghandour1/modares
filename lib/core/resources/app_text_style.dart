@@ -12,7 +12,7 @@ class AppTextStyle {
   static const TextStyle secondaryStyle = TextStyle(
     fontFamily: 'Cairo',
     fontSize: 18,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     color: AppColor.mainGray,
   );
   static const TextStyle primaryButtonStyle = TextStyle(

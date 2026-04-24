@@ -51,6 +51,7 @@ dependencies:
   flutter_svg: ^2.2.3
   equatable: ^2.0.8
   uuid: ^4.5.3
+  dropdown_button2: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -92,7 +92,7 @@ class SignUp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.85,
                           height: MediaQuery.of(context).size.height,
                           alignment: Alignment.center,
-                          color: Colors.black.withOpacity(0.02),
+                          color: Colors.black.withValues(alpha: 0.02),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16.0,

@@ -50,6 +50,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         final user = AuthModel.fromJson(response);
         CacheHelper.saveToken(user.token);
+        CacheHelper.saveUser(user.user);
         emit(LoginSuccess());
       } on ServerException catch (e) {
         emit(

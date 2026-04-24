@@ -7,8 +7,8 @@ import 'package:modares/model/user_model.dart';
 
 class CacheHelper {
   static const storage = FlutterSecureStorage(
-    iOptions:  IOSOptions(accessibility: KeychainAccessibility.first_unlock),
-    aOptions:  AndroidOptions(encryptedSharedPreferences: true)
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
 
   static Future<String> getToken() async {
@@ -19,12 +19,20 @@ class CacheHelper {
     return await storage.write(key: 'token', value: token);
   }
 
-  static Future<String> getUser() async {
-    return await storage.read(key: 'user') ?? "";
+  static Future<UserModel> getUser() async {
+    String? jsonString = await storage.read(key: 'user');
+
+    if (jsonString == null) {
+      throw Exception("No user found in cache");
+    }
+
+    final Map<String, dynamic> json = jsonDecode(jsonString);
+
+    return UserModel.fromJson(json);
   }
 
   static Future<void> saveUser(UserModel user) async {
-    String jsonString = jsonEncode(user);
+    String jsonString = jsonEncode(user.toJson());
     return await storage.write(key: 'user', value: jsonString);
   }
 

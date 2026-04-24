@@ -183,6 +183,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get seeAll => 'عرض الكل';
 
   @override
+  String get searchTeacherNameHint => 'ابحث باسم المدرس';
+
+  @override
+  String get noMatchFound => 'عذرًا، لم يتم العثور على نتائج';
+
+  @override
   String welcomeHeaderTitle(Object name) {
     return 'أهلًا بك يا $name';
   }
@@ -252,4 +258,130 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get units => 'الوحدات المستمرة';
+
+  @override
+  String get governorate_cairo => 'القاهرة';
+
+  @override
+  String get governorate_alexandria => 'الإسكندرية';
+
+  @override
+  String get governorate_portSaid => 'بورسعيد';
+
+  @override
+  String get governorate_suez => 'السويس';
+
+  @override
+  String get governorate_beheira => 'البحيرة';
+
+  @override
+  String get governorate_daqahliya => 'الدقهلية';
+
+  @override
+  String get governorate_damietta => 'دمياط';
+
+  @override
+  String get governorate_gharbiya => 'الغربية';
+
+  @override
+  String get governorate_kafrElSheikh => 'كفر الشيخ';
+
+  @override
+  String get governorate_monufia => 'المنوفية';
+
+  @override
+  String get governorate_qalyubia => 'القليوبية';
+
+  @override
+  String get governorate_sharqiya => 'الشرقية';
+
+  @override
+  String get governorate_ismailia => 'الإسماعيلية';
+
+  @override
+  String get governorate_asyut => 'أسيوط';
+
+  @override
+  String get governorate_aswan => 'أسوان';
+
+  @override
+  String get governorate_beniSuef => 'بني سويف';
+
+  @override
+  String get governorate_fayoum => 'الفيوم';
+
+  @override
+  String get governorate_giza => 'الجيزة';
+
+  @override
+  String get governorate_luxor => 'الأقصر';
+
+  @override
+  String get governorate_minya => 'المنيا';
+
+  @override
+  String get governorate_qena => 'قنا';
+
+  @override
+  String get governorate_sohag => 'سوهاج';
+
+  @override
+  String get governorate_matrouh => 'مطروح';
+
+  @override
+  String get governorate_newValley => 'الوادي الجديد';
+
+  @override
+  String get governorate_redSea => 'البحر الأحمر';
+
+  @override
+  String get governorate_northSinai => 'شمال سيناء';
+
+  @override
+  String get governorate_southSinai => 'جنوب سيناء';
+
+  @override
+  String get filterDialogTitle => 'تصفية النتائج';
+
+  @override
+  String get filterDialogReset => 'إعادة تعيين';
+
+  @override
+  String get governorate => 'المحافظة';
+
+  @override
+  String get chooseGovernorate => 'اختر المحافظة';
+
+  @override
+  String get teachingMethod => 'طريقة التدريس';
+
+  @override
+  String get online => 'أونلاين';
+
+  @override
+  String get offline => 'حضوري';
+
+  @override
+  String get sortBy => 'الترتيب';
+
+  @override
+  String get newest => 'الأحدث';
+
+  @override
+  String get topRated => 'الأعلى تقييماً';
+
+  @override
+  String get priceHigh => 'الأعلى سعراً';
+
+  @override
+  String get priceLow => 'الأقل سعراً';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get profileButton => 'الملف الشخصي';
 }
