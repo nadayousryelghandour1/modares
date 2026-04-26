@@ -7,12 +7,13 @@ import 'package:modares/core/resources/app_error_page.dart';
 import 'package:modares/core/resources/app_loading.dart';
 import 'package:modares/features/widget/profile_form.dart';
 
-
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+   Profile({super.key});
+
 
   @override
   Widget build(BuildContext context) {
+    // final ImageP picker = ImagePicker();
     final ProfileBloc bloc = getIt<ProfileBloc>();
     return SizedBox(
       width: double.infinity,
@@ -20,9 +21,7 @@ class Profile extends StatelessWidget {
       child: BlocConsumer<ProfileBloc, ProfileState>(
         bloc: bloc,
         listener: (context, state) {
-          if(state is ProfileEditSuccess){
-
-          }
+          if (state is ProfileEditSuccess) {}
         },
         builder: (context, state) {
           if (state is ProfileSuccess) {
@@ -119,35 +118,53 @@ class Profile extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Center(
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppColor.mainWhite,
-                        shape: BoxShape.circle,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(80),
-                        child: Container(
-                          width: 160,
-                          height: 160,
-                          decoration: const BoxDecoration(
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColor.mainWhite,
                             shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 100,
-                                blurStyle: BlurStyle.normal,
-                                spreadRadius: 10,
-                              ),
-                            ],
                           ),
-                          child: Image.network(
-                            state.profile.image ??
-                                "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(80),
+                            child: Container(
+                              width: 160,
+                              height: 160,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.network(
+                                state.profile.image ??
+                                    "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+
+                        // زرار التعديل
+                        Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: InkWell(
+                            onTap: () async {},
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColor.primeryColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

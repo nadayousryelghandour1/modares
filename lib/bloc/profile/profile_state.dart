@@ -19,7 +19,6 @@ final class ProfileFailure extends ProfileState {
   ProfileFailure({required this.errors, this.message});
 }
 
-class ProfileEditLoading extends ProfileState {}
 
 class ProfileEditSuccess extends ProfileState {}
 
@@ -28,4 +27,11 @@ final class ProfileEditFailure extends ProfileState {
   final String? message;
 
   ProfileEditFailure({required this.errors, this.message});
+}
+
+final class ProfileImageEditFailure extends ProfileState {
+  final dynamic errors;
+  final String? message;
+
+  ProfileImageEditFailure({required this.errors, this.message});
 }

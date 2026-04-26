@@ -39,6 +39,8 @@ class ApiKey {
   static String sortBy = 'sortBy';
   static String desc = 'desc';
   static String major = 'major';
+  static String image = 'image';
+  static String isProfileImage = 'isProfileImage';
 
   // static String confirmPassword = 'confirmPassword';
   // static String firstName = 'firstName';

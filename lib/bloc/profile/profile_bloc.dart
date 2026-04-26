@@ -73,5 +73,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         );
       }
     });
+
+    on<EditProfileImageEvent>((event, emit) async {
+      final user = await CacheHelper.getUser();
+
+      emit(ProfileLoading());
+      try {
+        final response = await api.patch(
+          '${EndPoints.getProfile}${user.id}',
+          data: {
+            ApiKey.id: user.id,
+            ApiKey.image: event.image,
+            ApiKey.isProfileImage: true,
+          },
+        );
+        if (response["success"] == true) {
+          isEditing = true;
+          add(GatProfileEvent());
+        }
+      } on ServerException catch (e) {
+        emit(
+          ProfileEditFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
   }
 }
