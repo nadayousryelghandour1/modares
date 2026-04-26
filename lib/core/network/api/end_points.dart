@@ -32,11 +32,13 @@ class ApiKey {
   static String phoneNumber = 'PhoneNumber';
   static String confirmPassword = 'ConfirmPassword';
   static String role = 'Role';
+  static String id = 'id';
   static String gridId = 'gradeId';
   static String stage = 'stage';
   static String subjectId = 'subjectId';
   static String sortBy = 'sortBy';
   static String desc = 'desc';
+  static String major = 'major';
 
   // static String confirmPassword = 'confirmPassword';
   // static String firstName = 'firstName';

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
+import 'package:modares/core/resources/app_error_page.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/features/filter_dialog.dart';
 import 'package:modares/features/search/skeleton.dart';
@@ -100,7 +101,11 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
                   } else {
                     return NoMatch();
                   }
-                } else if (state is TeacherSearchError) {}
+                } else if (state is TeacherSearchError) {
+                  return ErrorScreen(
+                    message: state.message ?? "Unexpected Error Occur",
+                  );
+                }
                 return Expanded(
                   child: ListView.builder(
                     itemCount: 6,

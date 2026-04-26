@@ -6,6 +6,7 @@ class AppButton extends StatelessWidget {
   final String text;
   final Widget widget;
   final Widget widget2;
+  final double? width;
   final void Function()? onTap;
   const AppButton({
     super.key,
@@ -13,6 +14,7 @@ class AppButton extends StatelessWidget {
     required this.onTap,
     this.widget = const SizedBox.shrink(),
     this.widget2 = const SizedBox.shrink(),
+    this.width,
   });
 
   @override
@@ -20,10 +22,18 @@ class AppButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        width: width ?? double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColor.primeryColorDark,AppColor.primeryColor, AppColor.primeryColor,AppColor.primeryColor, AppColor.primeryColor, AppColor.primeryColorDark],
+            colors: [
+              AppColor.primeryColorDark,
+              AppColor.primeryColor,
+              AppColor.primeryColor,
+              AppColor.primeryColor,
+              AppColor.primeryColor,
+              AppColor.primeryColorDark,
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

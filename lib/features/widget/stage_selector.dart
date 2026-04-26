@@ -19,8 +19,15 @@ enum StudentStage {
 
 class StageSelector extends StatefulWidget {
   final ValueChanged<int?> onChanged;
+  final bool? isEnabled;
+  final int? val;
 
-  const StageSelector({super.key, required this.onChanged});
+  const StageSelector({
+    super.key,
+    required this.onChanged,
+    this.isEnabled,
+    this.val,
+  });
 
   @override
   State<StageSelector> createState() => _StageSelectorState();
@@ -82,9 +89,15 @@ class _StageSelectorState extends State<StageSelector> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final selectedValue = widget.val != null
+        ? stages.firstWhere((stage) => stage["id"] == widget.val)
+        : selected;
     return DropdownButtonFormField<Map<String, dynamic>>(
-      value: selected,
+      value: selectedValue ?? selected,
+      focusColor: AppColor.mainWhite,
       decoration: InputDecoration(
+        fillColor: AppColor.mainWhite,
+        filled: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         hintText: loc.choose_stage,
         border: OutlineInputBorder(
@@ -99,6 +112,11 @@ class _StageSelectorState extends State<StageSelector> {
           borderSide: BorderSide(color: Colors.transparent, width: 2),
           borderRadius: BorderRadius.circular(15),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent, width: 2),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        enabled: widget.isEnabled ?? true
       ),
       items: stages.map((e) {
         return DropdownMenuItem(
@@ -106,16 +124,19 @@ class _StageSelectorState extends State<StageSelector> {
           child: Text(_getLocalizedStage(e['key'], loc)),
         );
       }).toList(),
-      onChanged: (value) {
-        setState(() {
-          selected = value;
-        });
-        widget.onChanged(value!['id']);
-      },
+      onChanged: widget.isEnabled == false
+          ? null
+          : (value) {
+              setState(() {
+                selected = value;
+              });
+              widget.onChanged(value?['id']);
+            },
       style: TextStyle(
         fontFamily: 'Cairo',
-        fontSize: 16,
+        fontSize: 18,
         color: AppColor.primaryTextColor,
+        fontWeight: FontWeight.w500,
         height: 1.4,
       ),
       validator: (value) {

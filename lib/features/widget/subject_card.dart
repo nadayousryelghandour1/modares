@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modares/core/resources/app_text_style.dart';
+import 'package:modares/features/widget/no_courses.dart';
 import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/model/subject_model.dart';
 
@@ -11,35 +12,40 @@ class SubjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
 
-    return SizedBox(
-      width: 130,
-      height: 130,
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-
-            child: Container(
-              width: 88,
-              height: 88,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                color: Color.lerp(subject.color, Colors.white, 0.85)!,
-                borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>NoCourses()));
+      },
+      child: SizedBox(
+        width: 130,
+        height: 130,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+      
+              child: Container(
+                width: 88,
+                height: 88,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Color.lerp(subject.color, Colors.white, 0.85)!,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(child: Icon(subject.icon, color: subject.color, size: 50)),
               ),
-              child: Center(child: Icon(subject.icon, color: subject.color, size: 50)),
             ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            _localizedSubjectName(subject.labelKey, loc),
-            style: AppTextStyle.subjectCardStyle,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+            SizedBox(height: 5),
+            Text(
+              _localizedSubjectName(subject.labelKey, loc),
+              style: AppTextStyle.subjectCardStyle,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }

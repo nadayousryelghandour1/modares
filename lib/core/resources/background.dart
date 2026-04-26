@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:modares/core/resources/app_color.dart';
 
 const _blue = Color(0xFF1b4fa8);
 const _yellow = Color(0xFFf5a623);
@@ -197,15 +198,18 @@ class _State extends State<MudarrisBackground> with TickerProviderStateMixin {
           onPanUpdate: (d) => _touch = _toViewBox(d.localPosition),
           onPanEnd: (_) => _touch = const Offset(-9999, -9999),
           onPanCancel: () => _touch = const Offset(-9999, -9999),
-          child: CustomPaint(
-            painter: _Painter(
-              els: _els,
-              atoms: _atoms,
-              phys: _phys,
-              float: _float,
-              spin: _spin,
+          child: Container(
+            color: AppColor.mainBackground,
+            child: CustomPaint(
+              painter: _Painter(
+                els: _els,
+                atoms: _atoms,
+                phys: _phys,
+                float: _float,
+                spin: _spin,
+              ),
+              size: Size.infinite,
             ),
-            size: Size.infinite,
           ),
         );
       },
