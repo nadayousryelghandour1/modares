@@ -87,7 +87,15 @@ class _ProfileFormState extends State<ProfileForm> {
                               });
                             },
                           ),
-                          AppButton(text: "Cancel", width: 180, onTap: () {}),
+                          AppButton(
+                            text: "Cancel",
+                            width: 180,
+                            onTap: () {
+                           setState(() {
+                                isEditing = !isEditing;
+                              });
+                            },
+                          ),
                         ],
                       )
                     : AppButton(

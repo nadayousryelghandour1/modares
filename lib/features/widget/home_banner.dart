@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/l10n/app_localizations.dart';
 
@@ -11,7 +12,7 @@ class HomeBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white
+        color: AppColor.mainBackground
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

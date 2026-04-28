@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:modares/core/network/api/api_consumer.dart';
 import 'package:modares/core/network/api/end_points.dart';
 import 'package:modares/core/network/errors/exception.dart';

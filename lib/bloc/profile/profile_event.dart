@@ -7,7 +7,7 @@ class GatProfileEvent extends ProfileEvent {}
 class EditProfileEvent extends ProfileEvent {}
 
 class EditProfileImageEvent extends ProfileEvent {
-  final String image;
+  final XFile? image;
 
-  EditProfileImageEvent({required this.image});
+  EditProfileImageEvent({ this.image});
 }

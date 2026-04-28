@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:modares/core/network/api/api_consumer.dart';
 import 'package:modares/core/network/api/end_points.dart';
 import 'package:modares/core/network/errors/exception.dart';

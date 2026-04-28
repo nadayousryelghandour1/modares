@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:modares/core/resources/app_button.dart';
-import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/features/bottom_nav_bar/view.dart';

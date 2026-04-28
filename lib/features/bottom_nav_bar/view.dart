@@ -8,6 +8,8 @@ import 'package:modares/core/resources/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modares/core/resources/background.dart';
 import 'package:modares/features/Profile/view.dart';
+import 'package:modares/features/all_chats/view.dart';
+import 'package:modares/features/chat/view.dart';
 import 'package:modares/features/home/view.dart';
 import 'package:modares/features/search/view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,12 +46,16 @@ class _HomeState extends State<Home> {
     }
   }
 
-  List<Widget> screens = [StudentHome(), TeacherSearchPage(), Profile()];
+  List<Widget> screens = [
+    StudentHome(),
+    TeacherSearchPage(),
+    Profile(),
+    AllChats(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       extendBody: true,
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -99,21 +105,19 @@ class _HomeState extends State<Home> {
               color: indexing == 2 ? Colors.white : Color(0xff001F3F),
             ),
           ),
-          // CurvedNavigationBarItem(
-          //   child: SvgPicture.asset(
-          //     AppImage.personIcon,
-          //     colorFilter: ColorFilter.mode(
-          //       indexing == 2
-          //           ? Colors.white
-          //           : Color(0xff999999),
-          //       BlendMode.srcIn,
-          //     ),
-          //   ),
-          //   label: "Account",
-          //   labelStyle: TextStyle(
-          //     color: indexing == 2 ? Colors.white : Color(0xff001F3F),
-          //   ),
-          // ),
+          CurvedNavigationBarItem(
+            child: SvgPicture.asset(
+              AppImage.searchIcon,
+             colorFilter: ColorFilter.mode(
+                indexing == 2 ? AppColor.primeryColor : AppColor.mainWhite,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Chat",
+            labelStyle: TextStyle(
+              color: indexing == 2 ? Colors.white : Color(0xff001F3F),
+            ),
+          ),
         ],
       ),
 
