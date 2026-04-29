@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/network/services/chat.dart';
+import 'package:modares/core/resources/cache_helper.dart';
 import 'package:modares/model/user_model.dart';
 import 'package:modares/model/message_model.dart';
 
@@ -22,29 +23,18 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   Future<void> _onOpenChat(OpenChat event, Emitter<ChatState> emit) async {
     emit(ChatLoading());
+    final user = await CacheHelper.getUser();
     try {
       await _chatService.createConversationIfNotExists(
-        currentUser: event.currentUser,
+        currentUser: user,
         teacherEmail: event.teacherEmail,
+        teacherImage: event.teacherImage,
+        teacherName: event.teacherName
       );
 
-      await _messagesSubscription?.cancel();
-      _messagesSubscription = _chatService
-          .getMessages(
-            studentId: event.currentUser.id.toString(),
-            teacherEmail: event.teacherEmail,
-          )
-          .listen(
-            (snapshot) {
-              final messages = snapshot.docs
-                  .map((doc) => MessageModel.fromJson(
-                        doc.data() as Map<String, dynamic>,
-                      ))
-                  .toList();
-              add(MessagesUpdated(messages: messages)); 
-            },
-            onError: (e) => emit(ChatError(message: e.toString())),
-          );
+     
+     
+     
     } catch (e) {
       emit(ChatError(message: e.toString()));
     }

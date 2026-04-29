@@ -23,7 +23,6 @@ class SubjectCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-      
               child: Container(
                 width: 88,
                 height: 88,

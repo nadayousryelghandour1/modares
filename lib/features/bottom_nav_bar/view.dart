@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:modares/core/resources/background.dart';
 import 'package:modares/features/Profile/view.dart';
 import 'package:modares/features/all_chats/view.dart';
-import 'package:modares/features/chat/view.dart';
 import 'package:modares/features/home/view.dart';
 import 'package:modares/features/search/view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> {
     StudentHome(),
     TeacherSearchPage(),
     Profile(),
-    AllChats(),
+    ConversationsPage(),
   ];
 
   @override

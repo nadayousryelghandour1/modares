@@ -46,7 +46,7 @@ class TeacherSearchBloc extends Bloc<TeacherSearchEvent, TeacherSearchState> {
           sortBy != null ? (sortBy! > 2 ? 2 : sortBy) : null,
         );
         final response = await api.get(
-          EndPoints.getTeacher,
+          EndPoints.getTeachers,
           queryParameters: params,
         );
 
@@ -87,7 +87,7 @@ class TeacherSearchBloc extends Bloc<TeacherSearchEvent, TeacherSearchState> {
         emit(
           TeacherSearchLoaded(teachers: teachers, displayedTeachers: filtered),
         );
-      } catch (e) {
+      } on ServerException catch (e) {
         emit(TeacherSearchError(message: e.toString(), errors: null));
       }
     });
@@ -103,7 +103,7 @@ class TeacherSearchBloc extends Bloc<TeacherSearchEvent, TeacherSearchState> {
       subjectId = null;
       try {
         final response = await api.get(
-          EndPoints.getTeacher,
+          EndPoints.getTeachers,
           queryParameters: {ApiKey.stage: user.grade.stage},
         );
 

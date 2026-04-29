@@ -92,3 +92,18 @@ List<StageModel> stagesData = rawStagesData.map((stage) {
 }).toList();
 
 final filteredStages = stagesData.where((stage) => stage.stage == "3").first;
+List<String> getSubjectKeys(List<int> subjectIds) {
+  final List<String> subjectKeys = [];
+
+  for (var stage in rawStagesData) {
+    final subjects = stage["subjects"] as List;
+
+    for (var subject in subjects) {
+      if (subjectIds.contains(subject["id"])) {
+        subjectKeys.add(subject["labelKey"] as String);
+      }
+    }
+  }
+
+  return subjectKeys.toSet().toList();
+}

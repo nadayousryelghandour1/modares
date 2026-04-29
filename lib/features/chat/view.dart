@@ -1,88 +1,216 @@
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modares/bloc/chat/chat_bloc.dart';
+import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
-import 'package:modares/core/resources/consts.dart';
 import 'package:modares/features/widget/custom_field.dart';
-import 'package:modares/model/chat_model.dart';
+import 'package:modares/model/user_model.dart';
 
-class Chat extends StatefulWidget {
-  const Chat({super.key});
+class ChatPage extends StatefulWidget {
+  final UserModel currentUser;
+  final String teacherEmail;
+  final String teacherName;
+  final String? teacherImage;
+
+  const ChatPage({
+    super.key,
+    required this.currentUser,
+    required this.teacherEmail,
+    required this.teacherName,
+    this.teacherImage,
+  });
 
   @override
-  State<Chat> createState() => _ChatState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatState extends State<Chat> {
-  // ImagePicker
-  TextEditingController message = TextEditingController();
-  String myName= "chat1";
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController _message = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  late final ChatBloc _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = getIt<ChatBloc>();
+    _bloc.add(OpenChat(
+      currentUser: widget.currentUser,
+      teacherEmail: widget.teacherEmail,
+      teacherName: widget.teacherName,
+      teacherImage: widget.teacherImage,
+    ));
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  void _sendMessage() {
+    if (_message.text.trim().isEmpty) return;
+    _bloc.add(SendMessage(
+      currentUser: widget.currentUser,
+      teacherEmail: widget.teacherEmail,
+      text: _message.text.trim(),
+    ));
+    _message.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: chat.length,
-              itemBuilder: (_, index) {
-                return BubbleSpecialThree(
-                  text: chat[index].text,
-                  color: const Color(0xFF1B97F3),
-                  // isSender: chat[index].senderName == ,
-                  tail: true,
-                  textStyle: const TextStyle(color: Colors.white, fontSize: 16),
-                );
-              },
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            CircleAvatar(
+              radius: 18,
+              backgroundColor: AppColor.primeryColor.withOpacity(0.1),
+              backgroundImage: widget.teacherImage != null
+                  ? NetworkImage(widget.teacherImage!)
+                  : null,
+              child: widget.teacherImage == null
+                  ? Text(
+                      widget.teacherName[0],
+                      style: TextStyle(color: AppColor.primeryColor),
+                    )
+                  : null,
             ),
-          ),
-          AnimatedPadding(
-            duration: const Duration(milliseconds: 200),
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
+            const SizedBox(width: 8),
+            Text(
+              widget.teacherName,
+              style: const TextStyle(
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
             ),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              decoration: BoxDecoration(
-                color: AppColor.primeryColor,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Messages
+            Expanded(
+              child: BlocConsumer<ChatBloc, ChatState>(
+                bloc: _bloc,
+                listener: (context, state) {
+                  if (state is ChatLoaded) _scrollToBottom();
+                },
+                builder: (context, state) {
+                  if (state is ChatLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (state is ChatError) {
+                    return Center(child: Text(state.message));
+                  }
+
+                  if (state is ChatLoaded) {
+                    if (state.messages.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "ابدأ المحادثة مع ${widget.teacherName}",
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: state.messages.length,
+                      itemBuilder: (_, index) {
+                        final msg = state.messages[index];
+                        final isMe = msg.senderId ==
+                            widget.currentUser.id.toString();
+
+                        return BubbleSpecialThree(
+                          text: msg.text,
+                          color: isMe
+                              ? AppColor.primeryColor
+                              : Colors.grey[200]!,
+                          isSender: isMe, // 👈 يحدد اتجاه الـ bubble
+                          tail: true,
+                          textStyle: TextStyle(
+                            color: isMe ? Colors.white : Colors.black87,
+                            fontSize: 15,
+                            fontFamily: "Cairo",
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  return const SizedBox();
+                },
+              ),
+            ),
+
+            // Input
+            AnimatedPadding(
+              duration: const Duration(milliseconds: 200),
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColor.primeryColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomField(
+                        hint: "اكتب رسالتك...",
+                        controller: _message,
+                        onChange: (val) {},
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        onPressed: _sendMessage,
+                        icon: Icon(
+                          Icons.send,
+                          color: AppColor.primeryColor,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CustomField(
-                      hint: "write your message",
-                      controller: message,
-                      onChange: (val) {
-                        message.text = val;
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColor.mainWhite,
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          chat.add(ChatModel(message: message.text, senderName: "chat1"));
-                          message.clear();
-                        });
-                      },
-                      icon: const Icon(Icons.send),
-                    ),
-                  ),
-                ],
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _message.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 }

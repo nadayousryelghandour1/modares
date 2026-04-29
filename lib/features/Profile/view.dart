@@ -32,6 +32,7 @@ class Profile extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: false,
       body: SizedBox(
         width: double.infinity,
@@ -51,10 +52,10 @@ class Profile extends StatelessWidget {
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.indigo,
-                          Colors.blue,
-                          Colors.blueAccent,
-                          Colors.cyan,
+                          AppColor.primeryColorDark,
+                          AppColor.primeryColor,
+                          AppColor.secondaryLoginButtonColor,
+                          AppColor.mainWhite,
                         ],
                       ),
                     ),

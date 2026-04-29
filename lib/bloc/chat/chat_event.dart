@@ -11,13 +11,16 @@ abstract class ChatEvent extends Equatable {
 class OpenChat extends ChatEvent {
   final UserModel currentUser;
   final String teacherEmail;
+  final String teacherName;  
+  final String? teacherImage; 
 
-  const OpenChat({required this.currentUser, required this.teacherEmail});
-
-  @override
-  List<Object?> get props => [currentUser, teacherEmail];
+  const OpenChat({
+    required this.currentUser,
+    required this.teacherEmail,
+    required this.teacherName,
+    this.teacherImage,
+  });
 }
-
 class SendMessage extends ChatEvent {
   final UserModel currentUser;
   final String teacherEmail;

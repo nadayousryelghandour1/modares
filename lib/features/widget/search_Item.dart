@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modares/bloc/teacher/teacher_bloc.dart';
+import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_text_style.dart';
@@ -13,6 +15,7 @@ class SearchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TeacherBloc bloc = getIt<TeacherBloc>();
     return Container(
       height: MediaQuery.of(context).size.height * 0.15,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -95,8 +98,8 @@ class SearchItem extends StatelessWidget {
                   Text(teacher.name, style: AppTextStyle.primaryStyle),
                   Expanded(
                     child: Row(
-                      children: teacher.subjects.asMap().entries.map((entry) {
-                        final isLast = entry.key == teacher.subjects.length - 1;
+                      children: teacher.subjects!.asMap().entries.map((entry) {
+                        final isLast = entry.key == teacher.subjects!.length - 1;
 
                         return Text(
                           isLast ? entry.value : "${entry.value} • ",
@@ -110,6 +113,7 @@ class SearchItem extends StatelessWidget {
 
                   GestureDetector(
                     onTap: () {
+                      bloc.add(GetTeacher(id: teacher.id));
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => TeacherDetails(),

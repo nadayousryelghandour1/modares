@@ -21,6 +21,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     Future.delayed(const Duration(seconds: 6), () async {
       CacheHelper.getToken().then((val) {
+        print("========================${val}=====================");
         if (val.isNotEmpty) {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Home()));
         } else {

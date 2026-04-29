@@ -2,19 +2,38 @@ class TeacherModel {
   final int id;
   final String name;
   final String? image;
+  final String? bgImg;
+  final String? overview;
+  final String? description;
   final double rating;
   final int teachingMethod;
   final String? government;
-  final List<String> subjects;
+
+  final String? phoneNumber;
+  final String? email;
+  final String? introVideoUrl;
+  final double? hoursOfTeaching;
+  final int? studentsCount;
+  final List<dynamic>? subjects;
+  final List<int>? subjectsIds;
 
   TeacherModel({
     required this.id,
     required this.name,
     this.image,
+    this.bgImg,
+    this.overview,
+    this.description,
     required this.rating,
     required this.teachingMethod,
     this.government,
-    required this.subjects,
+    this.phoneNumber,
+    this.email,
+    this.introVideoUrl,
+    this.hoursOfTeaching,
+    this.studentsCount,
+    this.subjects,
+    this.subjectsIds,
   });
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) {
@@ -22,12 +41,36 @@ class TeacherModel {
       id: json['id'] ?? 0,
       name: json['name'] ?? "",
       image: json['image'],
+      bgImg: json['bgImg'],
+      overview: json['overview'],
+      description: json['description'],
       rating: (json['rating'] ?? 0).toDouble(),
-      teachingMethod: json['teachingMethod'] ?? 0,
+      teachingMethod: json['teachingMethod'] is int
+          ? json['teachingMethod']
+          : _parseTeachingMethod(json['teachingMethod']),
       government: json['government'],
-      subjects: (json['subjects'] as List? ?? [])
-          .map((e) => e.toString())
+      phoneNumber: json['phoneNumber'],
+      email: json['email'],
+      introVideoUrl: json['introVideoUrl'],
+      hoursOfTeaching: json['hoursOfTeaching'] != null
+          ? (json['hoursOfTeaching']).toDouble()
+          : null,
+      studentsCount: json['studentsCount'],
+      subjectsIds: (json['subjectsIds'] as List?)
+          ?.map((e) => int.tryParse(e.toString()) ?? 0)
           .toList(),
+      subjects: json['subjects'],
     );
+  }
+}
+
+int _parseTeachingMethod(dynamic method) {
+  switch (method.toString().toLowerCase()) {
+    case "online":
+      return 1;
+    case "offline":
+      return 2;
+    default:
+      return 0;
   }
 }

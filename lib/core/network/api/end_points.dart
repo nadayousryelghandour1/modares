@@ -2,8 +2,13 @@ class EndPoints {
   static const String baseUrl = 'https://modares.runasp.net/';
   static const String login = 'auth/login';
   static const String register = 'auth/register';
-  static const String getTeacher = '/teacher/get-all-cards';
+  static const String getTeachers = '/teacher/get-all-cards';
+  static const String getTeacher = '/teacher';
   static const String getProfile = "student/";
+  static const String getBestTeachers = '/teacher/get-best-cards';
+  static const String getTeacherUnits = '/unit/get-teacher-units';
+  static const String getUnit = '/unit';
+
   // static const String confirmEmailResand = '/Auth/resend-confirmation-email';
   // static const String refreshToken = '/Auth/refresh' ;
   // static const String forgetPassword = '/Auth/request-password-reset';
@@ -41,6 +46,7 @@ class ApiKey {
   static String major = 'major';
   static String image = 'image';
   static String isProfileImage = 'isProfileImage';
+  static String teacherId = 'teacherId';
 
   // static String confirmPassword = 'confirmPassword';
   // static String firstName = 'firstName';

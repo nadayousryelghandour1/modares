@@ -12,6 +12,8 @@ class ChatService {
   Future<void> createConversationIfNotExists({
     required UserModel currentUser,
     required String teacherEmail,
+    required String teacherName,
+    required String? teacherImage,
   }) async {
     final chatId = getChatId(currentUser.id.toString(), teacherEmail);
     final docRef = _firestore.collection("conversations").doc(chatId);
@@ -19,6 +21,9 @@ class ChatService {
 
     if (!doc.exists) {
       await docRef.set({
+        "teacherName": teacherName,
+        "teacherImage": teacherImage,
+        "teacherEmail": teacherEmail,
         "participantIds": [currentUser.id.toString(), teacherEmail],
         "createdAt": FieldValue.serverTimestamp(),
         "createdAtMs": DateTime.now().millisecondsSinceEpoch,
