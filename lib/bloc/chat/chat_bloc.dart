@@ -32,9 +32,23 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         teacherName: event.teacherName
       );
 
-     
-     
-     
+      await _messagesSubscription?.cancel();
+      _messagesSubscription = _chatService
+          .getMessages(
+            studentId: event.currentUser.id.toString(),
+            teacherEmail: event.teacherEmail,
+          )
+          .listen(
+            (snapshot) {
+              final messages = snapshot.docs
+                  .map((doc) => MessageModel.fromJson(
+                        doc.data() as Map<String, dynamic>,
+                      ))
+                  .toList();
+              add(MessagesUpdated(messages: messages)); 
+            },
+            onError: (e) => emit(ChatError(message: e.toString())),
+          );
     } catch (e) {
       emit(ChatError(message: e.toString()));
     }

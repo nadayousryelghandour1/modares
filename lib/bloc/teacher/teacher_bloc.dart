@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:modares/core/network/api/api_consumer.dart';
@@ -39,9 +36,7 @@ class TeacherBloc extends Bloc<TeacherEvent, TeacherState> {
         final List<TeacherModel> teachers = (response['data'] as List)
             .map((e) => TeacherModel.fromJson(e as Map<String, dynamic>))
             .toList();
-        emit(
-          BestTeachersLoadSuccess(teachers: teachers),
-        );
+        emit(BestTeachersLoadSuccess(teachers: teachers));
       } on ServerException catch (e) {
         emit(
           BestTeachersLoadFailure(

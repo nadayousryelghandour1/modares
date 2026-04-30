@@ -1,5 +1,5 @@
 class AppImage {
-  static const splashScreenBackground = 'assets/images/splash.png';
+  static const splashScreenBackground = 'assets/images/bg.jfif';
   static const loading = 'assets/json/splash.json';
   static const homeIcon = 'assets/icon/home_icon.svg';
   static const searchIcon = 'assets/icon/search_icon.svg';
@@ -9,6 +9,10 @@ class AppImage {
   static const chatIcon = 'assets/icon/chat_icon.svg';
   static const container = 'assets/images/Container.png';
   static const noMatch = 'assets/icon/no_match.svg';
+  static const sendIcon = 'assets/icon/send_icon.svg';
+  static const noConversations = 'assets/images/no_conversations.png';
+  static const coursesBg = 'assets/images/courses_bg.jfif';
+
   ///////
   // static const test1 = 'assets/image/p1.png';
   // static const test2 = 'assets/image/p2.png';

@@ -16,6 +16,7 @@ import 'package:modares/features/bottom_nav_bar/view.dart';
 import 'package:modares/features/signup/view.dart';
 import 'package:modares/features/widget/checkbox.dart';
 import 'package:modares/features/widget/custom_password.dart';
+import 'package:modares/features/widget/forget_password.dart';
 import 'package:modares/l10n/app_localizations.dart';
 
 class Login extends StatelessWidget {
@@ -176,17 +177,22 @@ class Login extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
-                                                AppLocalizations.of(
-                                                  context,
-                                                )!.login_forgotPassword,
-                                                style: AppTextStyle
-                                                    .primaryStyleLoginScreen
-                                                    .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  showResetPasswordBottomSheet(context);
+                                                },
+                                                child: Text(
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.login_forgotPassword,
+                                                  style: AppTextStyle
+                                                      .primaryStyleLoginScreen
+                                                      .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                ),
                                               ),
                                             ],
                                           ),

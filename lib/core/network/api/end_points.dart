@@ -8,6 +8,10 @@ class EndPoints {
   static const String getBestTeachers = '/teacher/get-best-cards';
   static const String getTeacherUnits = '/unit/get-teacher-units';
   static const String getUnit = '/unit';
+  static const String forgetPassword = '/auth/create-otp';
+  static const String verifyOtp = '/auth/verify-otp';
+  static const String changePassword = '/auth/change-password';
+  static const String daleteAccount = '/student';
 
   // static const String confirmEmailResand = '/Auth/resend-confirmation-email';
   // static const String refreshToken = '/Auth/refresh' ;
@@ -32,11 +36,15 @@ class ApiKey {
   static String status = 'status';
   static String message = 'message';
   static String email = 'Email';
+  static String forgetEmail = 'email';
+
   static String password = 'Password';
   static String name = 'Name';
   static String phoneNumber = 'PhoneNumber';
   static String confirmPassword = 'ConfirmPassword';
   static String role = 'Role';
+  static String fingerprint = 'fingerprint';
+  static String deviceId = 'DeviceId';
   static String id = 'id';
   static String gridId = 'gradeId';
   static String stage = 'stage';
@@ -47,6 +55,7 @@ class ApiKey {
   static String image = 'image';
   static String isProfileImage = 'isProfileImage';
   static String teacherId = 'teacherId';
+  static String code = 'code';
 
   // static String confirmPassword = 'confirmPassword';
   // static String firstName = 'firstName';

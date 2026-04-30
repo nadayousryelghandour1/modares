@@ -19,6 +19,10 @@ class CacheHelper {
     return await storage.write(key: 'token', value: token);
   }
 
+  static Future<void> dalateToken() async {
+    return await storage.delete(key: 'token');
+  }
+
   static Future<UserModel> getUser() async {
     String? jsonString = await storage.read(key: 'user');
 
@@ -36,6 +40,9 @@ class CacheHelper {
     return await storage.write(key: 'user', value: jsonString);
   }
 
+  static Future<void> dalateUser() async {
+    return await storage.delete(key: 'user');
+  }
   // static Future<void> delete() async {
   //   return await storage.delete(key: 'token');
   // }

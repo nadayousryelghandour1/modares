@@ -5,8 +5,8 @@ import 'package:modares/model/user_model.dart';
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String getChatId(String studentId, String teacherEmail) {
-    return "${studentId}__${teacherEmail}";
+  String getChatId(String studentEmail, String teacherEmail) {
+    return "${studentEmail}__${teacherEmail}";
   }
 
   Future<void> createConversationIfNotExists({
@@ -15,7 +15,7 @@ class ChatService {
     required String teacherName,
     required String? teacherImage,
   }) async {
-    final chatId = getChatId(currentUser.id.toString(), teacherEmail);
+    final chatId = getChatId(currentUser.email.toString(), teacherEmail);
     final docRef = _firestore.collection("conversations").doc(chatId);
     final doc = await docRef.get();
 

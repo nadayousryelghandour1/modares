@@ -4,6 +4,7 @@ import 'package:modares/core/network/api/api_consumer.dart';
 import 'package:modares/core/network/api/end_points.dart';
 import 'package:modares/core/network/errors/exception.dart';
 import 'package:modares/core/network/service_locator.dart';
+import 'package:modares/core/network/services/device_id_service.dart';
 import 'package:modares/core/resources/cache_helper.dart';
 import 'package:modares/model/auth_model.dart';
 
@@ -38,6 +39,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : api = getIt<ApiConsumer>(), super(AuthInitial()) {
     on<LoginEvent>((event, emit) async {
+      final String deviceId = await getDeviceId();
+      final String fingerprint = await getFingerprint();
+
       emit(LoginLoading());
       try {
         final response = await api.post(
@@ -46,12 +50,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             ApiKey.email: loginEmailController.text,
             ApiKey.password: loginPasswordController.text,
             ApiKey.role: 0,
+            ApiKey.deviceId: deviceId,
+            ApiKey.fingerprint: fingerprint,
           },
         );
         final user = AuthModel.fromJson(response);
         CacheHelper.saveToken(user.token);
         CacheHelper.saveUser(user.user);
         emit(LoginSuccess());
+        loginEmailController.clear();
+        loginPasswordController.clear();
       } on ServerException catch (e) {
         emit(
           LoginFailure(
@@ -63,6 +71,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<SignUpEvent>((event, emit) async {
+      final String deviceId = await getDeviceId();
+      final String fingerprint = await getFingerprint();
       emit(SignUpLoading());
       try {
         final response = await api.post(
@@ -75,12 +85,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             ApiKey.confirmPassword: signupConfirmPasswordController.text,
             ApiKey.role: 0,
             ApiKey.gridId: int.tryParse(signupGradeIdController.text) ?? 0,
+            ApiKey.deviceId: deviceId,
+            ApiKey.fingerprint: fingerprint,
           },
         );
         final user = AuthModel.fromJson(response);
         CacheHelper.saveToken(user.token);
         CacheHelper.saveUser(user.user);
         emit(SignUpSuccess());
+        signupNameController.clear();
+        signupEmailController.clear();
+        signupPasswordController.clear();
+        signupPhoneController.clear();
+        signupConfirmPasswordController.clear();
+        signupGradeIdController.clear();
       } on ServerException catch (e) {
         emit(
           SignUpFailure(
@@ -91,68 +109,98 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    // on<EditAccountDetails>((event, emit) async {
-    //   try {
-    //     // ignore: unused_local_variable
-    //     final response = await api.put(
-    //       EndPoints.account,
-    //       data: {
-    //         ApiKey.firstName: firstName.text,
-    //         ApiKey.lastName: lastName.text,
-    //         ApiKey.userName: userName.text,
-    //         ApiKey.phoneNumber: phoneNumber.text.isEmpty
-    //             ? null
-    //             : phoneNumber.text,
-    //       },
-    //     );
-    //     emit(EditAccountDetailsSuccess());
-    //   } on ServerException catch (e) {
-    //     emit(
-    //       EditAccountDetailsFailure(
-    //         errMessage: e.errorModel.message,
-    //         errors: e.errorModel.error,
-    //       ),
-    //     );
-    //   }
-    // });
+    on<ForgetPasswordEvent>((event, emit) async {
+      try {
+        // ignore: unused_local_variable
+        final response = await api.post(
+          EndPoints.forgetPassword,
+          queryParameters: {ApiKey.email: event.email},
+        );
+        emit(RequestOTPSuccess(email: event.email));
+      } on ServerException catch (e) {
+        emit(
+          RequestOTPFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
 
-    // on<ChangedPassword>((event, emit) async {
-    //   try {
-    //     // ignore: unused_local_variable
-    //     final response = await api.put(
-    //       EndPoints.changePassword,
-    //       data: {
-    //         ApiKey.newPassword: newPassword.text,
-    //         ApiKey.currentPassword: currentPassword.text,
-    //       },
-    //     );
-    //     emit(ChangePasswordSuccess());
-    //   } on ServerException catch (e) {
-    //     emit(
-    //       ChangePasswordFailure(
-    //         errMessage: e.errorModel.message,
-    //         errors: e.errorModel.error,
-    //       ),
-    //     );
-    //   }
-    // });
+    on<VerifyOTP>((event, emit) async {
+      try {
+        // ignore: unused_local_variable
+        final response = await api.post(
+          EndPoints.verifyOtp,
+          queryParameters: {
+            ApiKey.code: event.otp,
+            ApiKey.email: event.email,
+          },
+        );
+        emit(OTPSuccess(email: event.email));
+      } on ServerException catch (e) {
+        emit(
+          OTPFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
 
-    // on<VerifyOtp>((event, emit) async {
-    //   try {
-    //     // ignore: unused_local_variable
-    //     final response = await api.post(
-    //       EndPoints.otp,
-    //       data: {ApiKey.otp: forgetPasswordOtp.text, ApiKey.email: email.text},
-    //     );
-    //     emit(VerifySuccess());
-    //   } on ServerException catch (e) {
-    //     emit(
-    //       VerifyFailure(
-    //         errMessage: e.errorModel.message,
-    //         errors: e.errorModel.error,
-    //       ),
-    //     );
-    //   }
-    // });
+    on<ChangePassword>((event, emit) async {
+      try {
+        // ignore: unused_local_variable
+        final response = await api.post(
+          EndPoints.changePassword,
+          data: {
+            ApiKey.email: event.email,
+            ApiKey.password: event.password,
+            ApiKey.confirmPassword: event.conformPassword,
+          },
+        );
+        emit(ResetPasswordSuccess());
+      } on ServerException catch (e) {
+        emit(
+          ResetPasswordFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
+
+    on<DeleteAccount>((event, emit) async {
+      final user = await CacheHelper.getUser();
+      try {
+        // ignore: unused_local_variable
+        final response = await api.delete(
+          '${EndPoints.daleteAccount}/${user.id}',
+        );
+        emit(AccountDeleteSuccess());
+      } on ServerException catch (e) {
+        emit(
+          AccountDeleteFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
+
+    on<Logout>((event, emit) async {
+      try {
+        CacheHelper.dalateToken();
+        CacheHelper.dalateUser();
+        emit(LogoutSuccess());
+      } on ServerException catch (e) {
+        emit(
+          LogoutFailure(
+            errors: e.errorModel.errors,
+            message: e.errorModel.message,
+          ),
+        );
+      }
+    });
   }
 }

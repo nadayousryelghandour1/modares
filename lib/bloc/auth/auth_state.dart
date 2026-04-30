@@ -26,31 +26,55 @@ final class SignUpFailure extends AuthState {
   SignUpFailure({required this.errors, this.message});
 }
 
-final class ForgetPasswordSuccess extends AuthState {}
+final class RequestOTPSuccess extends AuthState {
+  final String email;
 
-final class ForgetPasswordFailure extends AuthState {
-  final String errMessage;
-  final dynamic errors;
-
-  ForgetPasswordFailure({required this.errMessage, required this.errors});
+  RequestOTPSuccess({required this.email});
 }
 
-final class OTPSuccess extends AuthState {}
+final class RequestOTPFailure extends AuthState {
+  final dynamic errors;
+  final String? message;
+
+  RequestOTPFailure({required this.errors, required this.message});
+}
+
+final class OTPSuccess extends AuthState {
+  final String email;
+
+  OTPSuccess({required this.email});
+}
 
 final class OTPFailure extends AuthState {
-  final String errMessage;
   final dynamic errors;
+  final String? message;
 
-  OTPFailure({required this.errMessage, required this.errors});
+  OTPFailure({required this.errors, required this.message});
 }
 
 final class ResetPasswordSuccess extends AuthState {}
 
 final class ResetPasswordFailure extends AuthState {
-  final String errMessage;
   final dynamic errors;
+  final String? message;
 
-  ResetPasswordFailure({required this.errMessage, required this.errors});
+  ResetPasswordFailure({required this.errors, required this.message});
 }
 
-final class SignOut extends AuthState {}
+final class AccountDeleteSuccess extends AuthState {}
+
+final class AccountDeleteFailure extends AuthState {
+  final dynamic errors;
+  final String? message;
+
+  AccountDeleteFailure({required this.errors, required this.message});
+}
+
+final class LogoutSuccess extends AuthState {}
+
+final class LogoutFailure extends AuthState {
+  final dynamic errors;
+  final String? message;
+
+  LogoutFailure({required this.errors, required this.message});
+}
