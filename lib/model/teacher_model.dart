@@ -7,7 +7,7 @@ class TeacherModel {
   final String? description;
   final double rating;
   final int teachingMethod;
-  final String? government;
+  final int? government;
 
   final String? phoneNumber;
   final String? email;

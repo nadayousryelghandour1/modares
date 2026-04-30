@@ -6,8 +6,10 @@ import 'package:modares/bloc/profile/profile_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_error_page.dart';
+import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/snack_bar.dart';
 import 'package:modares/features/Profile/skeleton.dart';
+import 'package:modares/features/login/view.dart';
 import 'package:modares/features/widget/profile_form.dart';
 
 class Profile extends StatelessWidget {
@@ -40,7 +42,27 @@ class Profile extends StatelessWidget {
         child: BlocConsumer<ProfileBloc, ProfileState>(
           bloc: bloc,
           listener: (context, state) {
-            if (state is ProfileEditSuccess) {}
+            if (state is ProfileEditSuccess) {
+              showMySnackBar(
+                msg: "تم تحديث الملف الشخصي بنجاح",
+                type: AnimatedSnackBarType.success,
+                context: context,
+              );
+            } else if (state is LogoutSuccess ||
+                state is AccountDeleteSuccess) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+                (route) => false,
+              );
+            } else if (state is LogoutFailure ||
+                state is AccountDeleteFailure) {
+              showMySnackBar(
+                msg: "Unexpected Error Occur",
+                type: AnimatedSnackBarType.error,
+                context: context,
+              );
+            }
           },
           builder: (context, state) {
             if (state is ProfileSuccess) {
@@ -49,6 +71,7 @@ class Profile extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 200,
+                    padding: EdgeInsets.all(32),
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -56,6 +79,41 @@ class Profile extends StatelessWidget {
                           AppColor.primeryColor,
                           AppColor.secondaryLoginButtonColor,
                           AppColor.mainWhite,
+                        ],
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: PopupMenuButton<String>(
+                        icon: Icon(
+                          Icons.settings,
+                          color: AppColor.primeryColor,
+                          size: 35,
+                        ), // أو Icons.more_vert
+                        onSelected: (value) {
+                          if (value == 'logout') {
+                            bloc.add(Logout());
+                          } else if (value == 'delete') {
+                            bloc.add(DeleteAccount());
+                          }
+                        },
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: 'logout',
+                            child: Text(
+                              'تسجيل الخروج',
+                              style: AppTextStyle.secondaryStyle,
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: 'delete',
+                            child: Text(
+                              'حذف الحساب',
+                              style: AppTextStyle.secondaryStyle.copyWith(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

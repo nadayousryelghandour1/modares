@@ -170,37 +170,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<DeleteAccount>((event, emit) async {
-      final user = await CacheHelper.getUser();
-      try {
-        // ignore: unused_local_variable
-        final response = await api.delete(
-          '${EndPoints.daleteAccount}/${user.id}',
-        );
-        emit(AccountDeleteSuccess());
-      } on ServerException catch (e) {
-        emit(
-          AccountDeleteFailure(
-            errors: e.errorModel.errors,
-            message: e.errorModel.message,
-          ),
-        );
-      }
-    });
-
-    on<Logout>((event, emit) async {
-      try {
-        CacheHelper.dalateToken();
-        CacheHelper.dalateUser();
-        emit(LogoutSuccess());
-      } on ServerException catch (e) {
-        emit(
-          LogoutFailure(
-            errors: e.errorModel.errors,
-            message: e.errorModel.message,
-          ),
-        );
-      }
-    });
+    
   }
 }

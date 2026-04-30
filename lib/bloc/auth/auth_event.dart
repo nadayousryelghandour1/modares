@@ -32,6 +32,3 @@ class ChangePassword extends AuthEvent {
   });
 }
 
-class DeleteAccount extends AuthEvent {}
-
-class Logout extends AuthEvent {}

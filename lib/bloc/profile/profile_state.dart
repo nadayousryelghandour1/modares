@@ -35,3 +35,20 @@ final class ProfileImageEditFailure extends ProfileState {
 
   ProfileImageEditFailure({required this.errors, this.message});
 }
+final class AccountDeleteSuccess extends ProfileState {}
+
+final class AccountDeleteFailure extends ProfileState {
+  final dynamic errors;
+  final String? message;
+
+  AccountDeleteFailure({required this.errors, required this.message});
+}
+
+final class LogoutSuccess extends ProfileState {}
+
+final class LogoutFailure extends ProfileState {
+  final dynamic errors;
+  final String? message;
+
+  LogoutFailure({required this.errors, required this.message});
+}

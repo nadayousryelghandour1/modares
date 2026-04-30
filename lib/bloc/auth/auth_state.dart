@@ -61,20 +61,3 @@ final class ResetPasswordFailure extends AuthState {
   ResetPasswordFailure({required this.errors, required this.message});
 }
 
-final class AccountDeleteSuccess extends AuthState {}
-
-final class AccountDeleteFailure extends AuthState {
-  final dynamic errors;
-  final String? message;
-
-  AccountDeleteFailure({required this.errors, required this.message});
-}
-
-final class LogoutSuccess extends AuthState {}
-
-final class LogoutFailure extends AuthState {
-  final dynamic errors;
-  final String? message;
-
-  LogoutFailure({required this.errors, required this.message});
-}
