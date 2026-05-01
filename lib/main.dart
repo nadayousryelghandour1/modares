@@ -10,7 +10,6 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
   // DioHzz.initDio();
   setupServiceLocator();
   final localeProvider = LocaleProvider();

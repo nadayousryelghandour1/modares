@@ -47,7 +47,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: getIt<ChatService>().getConversations(_user!.id.toString()),
+        stream: getIt<ChatService>().getConversations(_user!.email.toString()),
         builder: (context, snapshot) {
           // loading
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -92,6 +92,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
             ),
             itemBuilder: (context, index) {
               final data = docs[index].data() as Map<String, dynamic>;
+              print("===================================================================================================${ docs[index].data()}");
               return _ConversationItem(
                 data: data,
                 currentUserId: _user!.id.toString(),

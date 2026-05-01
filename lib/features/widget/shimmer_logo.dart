@@ -48,7 +48,7 @@ class _ShimmerLogoState extends State<ShimmerLogo>
               stops: const [0.3, 0.5, 0.7],
               colors: [
                 Colors.transparent,
-                Colors.white.withOpacity(0.6),
+                Colors.white.withOpacity(0.7),
                 Colors.transparent,
               ],
               transform: GradientRotation(1.5),

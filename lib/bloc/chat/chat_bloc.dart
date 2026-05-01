@@ -13,7 +13,7 @@ part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ChatService _chatService = getIt<ChatService>();
-  StreamSubscription? _messagesSubscription; 
+  StreamSubscription? _messagesSubscription;
 
   ChatBloc() : super(ChatInitial()) {
     on<OpenChat>(_onOpenChat);
@@ -24,38 +24,40 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   Future<void> _onOpenChat(OpenChat event, Emitter<ChatState> emit) async {
     emit(ChatLoading());
-    final user = await CacheHelper.getUser();
     try {
+      final user = await CacheHelper.getUser();
+
       await _chatService.createConversationIfNotExists(
         currentUser: user,
         teacherEmail: event.teacherEmail,
         teacherImage: event.teacherImage,
-        teacherName: event.teacherName
+        teacherName: event.teacherName,
       );
 
       await _messagesSubscription?.cancel();
       _messagesSubscription = _chatService
           .getMessages(
-            studentEmail: event.currentUser.email,
+            studentEmail: user.email,
             teacherEmail: event.teacherEmail,
           )
-          .listen(
-            (snapshot) {
-              final messages = snapshot.docs
-                  .map((doc) => MessageModel.fromJson(
-                        doc.data() as Map<String, dynamic>,
-                      ))
-                  .toList();
-              add(MessagesUpdated(messages: messages)); 
-            },
-            onError: (e) => add(MessagesFailed(message: e.toString())),
-          );
+          .listen((snapshot) {
+            final messages = snapshot.docs
+                .map(
+                  (doc) =>
+                      MessageModel.fromJson(doc.data() as Map<String, dynamic>),
+                )
+                .toList();
+            add(MessagesUpdated(messages: messages));
+          }, onError: (e) => add(MessagesFailed(message: e.toString())));
     } catch (e) {
       emit(ChatError(message: e.toString()));
     }
   }
 
-  Future<void> _onSendMessage(SendMessage event, Emitter<ChatState> emit) async {
+  Future<void> _onSendMessage(
+    SendMessage event,
+    Emitter<ChatState> emit,
+  ) async {
     try {
       await _chatService.sendMessage(
         currentUser: event.currentUser,

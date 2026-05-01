@@ -33,15 +33,18 @@ class _CustomPasswordState extends State<CustomPassword> {
     return AppField(
       title: widget.title,
       hint: widget.hint,
-      icon: GestureDetector(
-        onTap: () {
-          setState(() {
-            isObscure = !isObscure;
-          });
-        },
-        child: isObscure
-            ? Icon(Icons.remove_red_eye, color: AppColor.mainGray)
-            : Icon(Icons.visibility_off, color: AppColor.mainGray),
+      icon: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              isObscure = !isObscure;
+            });
+          },
+          child: isObscure
+              ? Icon(Icons.remove_red_eye, color: AppColor.mainGray)
+              : Icon(Icons.visibility_off, color: AppColor.mainGray),
+        ),
       ),
       isObscure: isObscure,
       controller: widget.controller,

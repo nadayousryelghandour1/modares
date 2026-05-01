@@ -9,13 +9,11 @@ abstract class ChatEvent extends Equatable {
 }
 
 class OpenChat extends ChatEvent {
-  final UserModel currentUser;
   final String teacherEmail;
-  final String teacherName;  
-  final String? teacherImage; 
+  final String teacherName;
+  final String? teacherImage;
 
   const OpenChat({
-    required this.currentUser,
     required this.teacherEmail,
     required this.teacherName,
     this.teacherImage,

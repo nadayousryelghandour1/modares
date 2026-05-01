@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
           ),
           CurvedNavigationBarItem(
             child: SvgPicture.asset(
-              AppImage.searchIcon,
+              AppImage.chatIcon,
              colorFilter: ColorFilter.mode(
                 indexing == 3 ? AppColor.primeryColor : AppColor.mainWhite,
                 BlendMode.srcIn,

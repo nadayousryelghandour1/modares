@@ -6,7 +6,7 @@ class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String getChatId(String studentEmail, String teacherEmail) {
-    return "${studentEmail}__${teacherEmail}";
+    return "${studentEmail}__$teacherEmail";
   }
 
   Future<void> createConversationIfNotExists({
@@ -24,7 +24,7 @@ class ChatService {
         "teacherName": teacherName,
         "teacherImage": teacherImage,
         "teacherEmail": teacherEmail,
-        "participantIds": [currentUser.id.toString(), teacherEmail],
+        "participantIds": [currentUser.email, teacherEmail],
         "createdAt": FieldValue.serverTimestamp(),
         "createdAtMs": DateTime.now().millisecondsSinceEpoch,
         "lastMessageText": "",
@@ -41,7 +41,7 @@ class ChatService {
     required String teacherEmail,
     required String text,
   }) async {
-    final chatId = getChatId(currentUser.email.toString(), teacherEmail);
+    final chatId = getChatId(currentUser.email, teacherEmail);
     final now = DateTime.now().millisecondsSinceEpoch;
 
     await _firestore
@@ -49,7 +49,7 @@ class ChatService {
         .doc(chatId)
         .collection("messages")
         .add({
-          "senderId": currentUser.id.toString(),
+          "senderId": currentUser.email,
           "senderName": currentUser.name,
           "text": text,
           "createdAt": FieldValue.serverTimestamp(),
@@ -58,7 +58,7 @@ class ChatService {
 
     await _firestore.collection("conversations").doc(chatId).update({
       "lastMessageText": text,
-      "lastMessageSenderId": currentUser.id.toString(),
+      "lastMessageSenderEmail": currentUser.email,
       "lastMessageSenderName": currentUser.name,
       "lastMessageAt": FieldValue.serverTimestamp(),
       "lastMessageAtMs": now,
@@ -78,10 +78,10 @@ class ChatService {
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getConversations(String userId) {
+  Stream<QuerySnapshot> getConversations(String userEmail) {
     return _firestore
         .collection("conversations")
-        .where("participantIds", arrayContains: userId)
+        .where("participantIds", arrayContains: userEmail)
         .orderBy("lastMessageAtMs", descending: true)
         .snapshots();
   }

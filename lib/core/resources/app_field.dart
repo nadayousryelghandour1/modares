@@ -57,7 +57,7 @@ class _AppFieldState extends State<AppField> {
             errorText: widget.errorText,
             suffixIcon: widget.icon,
             suffixIconColor: AppColor.mainGray,
-            suffixIconConstraints: BoxConstraints(maxHeight: 40, maxWidth: 40),
+            suffixIconConstraints: BoxConstraints(maxHeight: 40, maxWidth: 40 ),
             focusColor: AppColor.primaryTextColor,
             hint: Text(
               widget.hint,

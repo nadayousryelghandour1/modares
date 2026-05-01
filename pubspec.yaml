@@ -59,6 +59,8 @@ dependencies:
   device_info_plus: ^12.4.0
   crypto: ^3.0.7
   pin_code_text_field: ^1.8.0
+  flutter_local_notifications: ^20.1.0
+  timezone: ^0.10.1
 
 dev_dependencies:
   flutter_test:
