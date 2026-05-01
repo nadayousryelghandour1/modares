@@ -12,6 +12,8 @@ class AppImage {
   static const sendIcon = 'assets/icon/send_icon.svg';
   static const noConversations = 'assets/images/no_conversations.png';
   static const coursesBg = 'assets/images/courses_bg.jfif';
+  static const wearningIcon = 'assets/icon/wearning.svg';
+  static const chatBackground = 'assets/images/chat_bg.jfif';
 
   ///////
   // static const test1 = 'assets/image/p1.png';
@@ -29,7 +31,6 @@ class AppImage {
   // static const settingsIcon = 'assets/icon/settings.svg';
   // static const envelopIcon = 'assets/icon/envelop.svg';
   // static const shareIcon = 'assets/icon/share.svg';
-  // static const wearningIcon = 'assets/icon/wearning.svg';
   // static const cartIcon = 'assets/icon/cart_icon.svg';
   // static const person = 'assets/image/person.jpg';
   // static const splash = 'assets/json/splash.json';

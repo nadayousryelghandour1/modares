@@ -49,7 +49,6 @@ class _StageSelectorState extends State<StageSelector> {
         return loc.stage_primary_5;
       case "stage_primary_6":
         return loc.stage_primary_6;
-
       case "stage_preparatory_1":
         return loc.stage_preparatory_1;
       case "stage_preparatory_2":

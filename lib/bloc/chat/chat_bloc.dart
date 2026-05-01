@@ -19,6 +19,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<OpenChat>(_onOpenChat);
     on<SendMessage>(_onSendMessage);
     on<MessagesUpdated>(_onMessagesUpdated);
+    on<MessagesFailed>(_onMessagesFailed);
   }
 
   Future<void> _onOpenChat(OpenChat event, Emitter<ChatState> emit) async {
@@ -35,7 +36,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       await _messagesSubscription?.cancel();
       _messagesSubscription = _chatService
           .getMessages(
-            studentId: event.currentUser.id.toString(),
+            studentEmail: event.currentUser.email,
             teacherEmail: event.teacherEmail,
           )
           .listen(
@@ -47,7 +48,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                   .toList();
               add(MessagesUpdated(messages: messages)); 
             },
-            onError: (e) => emit(ChatError(message: e.toString())),
+            onError: (e) => add(MessagesFailed(message: e.toString())),
           );
     } catch (e) {
       emit(ChatError(message: e.toString()));
@@ -68,6 +69,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   void _onMessagesUpdated(MessagesUpdated event, Emitter<ChatState> emit) {
     emit(ChatLoaded(messages: event.messages));
+  }
+
+  void _onMessagesFailed(MessagesFailed event, Emitter<ChatState> emit) {
+    emit(ChatError(message: event.message));
   }
 
   @override

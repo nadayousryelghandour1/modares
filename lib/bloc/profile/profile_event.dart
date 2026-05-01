@@ -11,6 +11,14 @@ class EditProfileImageEvent extends ProfileEvent {
 
   EditProfileImageEvent({ this.image});
 }
+
+// class GetStudentGradesEvent extends ProfileEvent {
+//   final int studentId;
+
+//   GetStudentGradesEvent({required this.studentId});
+
+// }
+
 class DeleteAccount extends ProfileEvent {}
 
 class Logout extends ProfileEvent {}

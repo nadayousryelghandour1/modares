@@ -6,7 +6,9 @@ import 'package:modares/bloc/profile/profile_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_error_page.dart';
+import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_text_style.dart';
+import 'package:modares/core/resources/log_out_sheet.dart';
 import 'package:modares/core/resources/snack_bar.dart';
 import 'package:modares/features/Profile/skeleton.dart';
 import 'package:modares/features/login/view.dart';
@@ -92,9 +94,25 @@ class Profile extends StatelessWidget {
                         ), // أو Icons.more_vert
                         onSelected: (value) {
                           if (value == 'logout') {
-                            bloc.add(Logout());
+                            LogOutSheet(
+                              image: AppImage.wearningIcon,
+                              purpose: "تسجيل الخروج",
+                              question: "هل انت متأكد من تسجيل خروجك ؟",
+                              answer: "نعم",
+                              onTap: () {
+                                bloc.add(Logout());
+                              },
+                            );
                           } else if (value == 'delete') {
-                            bloc.add(DeleteAccount());
+                            LogOutSheet(
+                              image: AppImage.wearningIcon,
+                              purpose: "حذف الحساب",
+                              question: "هل انت متأكد من حذف حسابك ؟",
+                              answer: "نعم",
+                              onTap: () {
+                                bloc.add(DeleteAccount());
+                              },
+                            );
                           }
                         },
                         itemBuilder: (context) => [

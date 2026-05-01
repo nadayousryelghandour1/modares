@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/model/stage_model.dart';
 import 'package:modares/model/subject_model.dart';
 
@@ -91,6 +92,8 @@ List<StageModel> stagesData = rawStagesData.map((stage) {
   );
 }).toList();
 
+
+
 final filteredStages = stagesData.where((stage) => stage.stage == "3").first;
 List<String> getSubjectKeys(List<int> subjectIds) {
   final List<String> subjectKeys = [];
@@ -107,3 +110,54 @@ List<String> getSubjectKeys(List<int> subjectIds) {
 
   return subjectKeys.toSet().toList();
 }
+
+String getSubjectKey(int subjectId, AppLocalizations loc) {
+   String subjectKey = '';
+
+  for (var stage in rawStagesData) {
+    final subjects = stage["subjects"] as List;
+
+    for (var subject in subjects) {
+      if (subjectId==subject["id"]) {
+        subjectKey=subject["labelKey"];
+      }
+    }
+  }
+
+  return _localizedSubjectName(subjectKey, loc);
+}
+ String _localizedSubjectName(String labelKey, AppLocalizations loc) {
+    switch (labelKey) {
+      case 'arabic':
+        return loc.arabic;
+      case 'mathematics':
+        return loc.mathematics;
+      case 'science':
+        return loc.science;
+      case 'socialStudies':
+        return loc.socialStudies;
+      case 'english':
+        return loc.english;
+      case 'physics':
+        return loc.physics;
+      case 'chemistry':
+        return loc.chemistry;
+      case 'biology':
+        return loc.biology;
+      case 'pureMathematics':
+        return loc.pureMathematics;
+      case 'appliedMathematics':
+        return loc.appliedMathematics;
+      case 'philosophy':
+        return loc.philosophy;
+      case 'psychology':
+        return loc.psychology;
+      case 'geography':
+        return loc.geography;
+      case 'history':
+        return loc.history;
+      default:
+        return labelKey;
+    }
+  }
+

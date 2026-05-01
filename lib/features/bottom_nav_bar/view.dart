@@ -108,13 +108,13 @@ class _HomeState extends State<Home> {
             child: SvgPicture.asset(
               AppImage.searchIcon,
              colorFilter: ColorFilter.mode(
-                indexing == 2 ? AppColor.primeryColor : AppColor.mainWhite,
+                indexing == 3 ? AppColor.primeryColor : AppColor.mainWhite,
                 BlendMode.srcIn,
               ),
             ),
             label: "Chat",
             labelStyle: TextStyle(
-              color: indexing == 2 ? Colors.white : Color(0xff001F3F),
+              color: indexing == 3 ? Colors.white : Color(0xff001F3F),
             ),
           ),
         ],

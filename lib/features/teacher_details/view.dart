@@ -6,10 +6,11 @@ import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_error_page.dart';
 import 'package:modares/core/resources/app_image.dart';
-import 'package:modares/core/resources/app_loading.dart';
 import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/background.dart';
+import 'package:modares/features/teacher_details/skeleton1.dart';
 import 'package:modares/features/widget/details_form.dart';
+import 'package:modares/features/widget/unit_section.dart';
 
 class TeacherDetails extends StatelessWidget {
   const TeacherDetails({super.key});
@@ -122,7 +123,9 @@ class TeacherDetails extends StatelessWidget {
                                             profile: state.teacher,
                                           ),
                                         ),
-                                        Container(color: Colors.blue),
+                                        SingleChildScrollView(
+                                          child: UnitsSection(teacherId: state.teacher.id),
+                                        ),
                                         Container(color: Colors.blue),
                                       ],
                                     ),
@@ -212,7 +215,7 @@ class TeacherDetails extends StatelessWidget {
                     message: state.message ?? "Unexpected Error Occur",
                   );
                 }
-                return AppLoading();
+                return TeacherDetailsSkeleton();
               },
             ),
           ),

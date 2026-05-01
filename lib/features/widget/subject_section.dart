@@ -34,6 +34,7 @@ class SubjectsSection extends StatelessWidget {
           children: subjectKeys.map((key) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              margin: EdgeInsets.symmetric(horizontal: 3, vertical: 5),
               decoration: BoxDecoration(
                 color: AppColor.mainWhite,
                 borderRadius: BorderRadius.circular(30),

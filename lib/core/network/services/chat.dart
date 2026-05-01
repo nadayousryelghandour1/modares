@@ -41,7 +41,7 @@ class ChatService {
     required String teacherEmail,
     required String text,
   }) async {
-    final chatId = getChatId(currentUser.id.toString(), teacherEmail);
+    final chatId = getChatId(currentUser.email.toString(), teacherEmail);
     final now = DateTime.now().millisecondsSinceEpoch;
 
     await _firestore
@@ -66,10 +66,10 @@ class ChatService {
   }
 
   Stream<QuerySnapshot> getMessages({
-    required String studentId,
+    required String studentEmail,
     required String teacherEmail,
   }) {
-    final chatId = getChatId(studentId, teacherEmail);
+    final chatId = getChatId(studentEmail, teacherEmail);
     return _firestore
         .collection("conversations")
         .doc(chatId)

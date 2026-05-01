@@ -87,7 +87,7 @@ class _DetailsFormState extends State<DetailsForm> {
             ),
             ProfileField(
               title: "نبذة مختصرة",
-              hint: widget.profile.description!,
+              hint: widget.profile.description ?? "No Bio Yet...",
               isEnabled: isEditing,
               controller: bloc.email,
             ),
@@ -112,7 +112,7 @@ class _DetailsFormState extends State<DetailsForm> {
 
                 await getIt<ChatService>().createConversationIfNotExists(
                   currentUser: user,
-                  teacherEmail: widget.profile.email!, // 👈 email المدرس
+                  teacherEmail: widget.profile.email!, 
                   teacherName: widget.profile.name,
                   teacherImage: widget.profile.image,
                 );
