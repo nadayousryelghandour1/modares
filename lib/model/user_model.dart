@@ -1,4 +1,5 @@
 import 'package:modares/model/grade_model.dart';
+import 'package:modares/model/quiz_result_model.dart';
 
 class UserModel {
   final int id;
@@ -16,6 +17,7 @@ class UserModel {
   final int? subjectsLanguage;
   final int? government;
   final String? state;
+  final List<QuizResultModel>? quizResults;
 
   UserModel({
     required this.id,
@@ -34,6 +36,7 @@ class UserModel {
     this.subjectsLanguage,
     this.government,
     this.state,
+    this.quizResults
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -61,6 +64,11 @@ class UserModel {
       subjectsLanguage: json['subjectsLanguage'] ?? 0,
       government: json['government'] ?? 0,
       state: json['state'],
+      quizResults: json['quizResults'] != null
+    ? (json['quizResults'] as List)
+        .map((e) => QuizResultModel.fromJson(e as Map<String, dynamic>))
+        .toList()
+    : null,
     );
   }
 

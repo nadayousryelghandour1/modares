@@ -13,10 +13,10 @@ class AppImage {
   static const noConversations = 'assets/images/no_conversations.png';
   static const coursesBg = 'assets/images/courses_bg.jfif';
   static const wearningIcon = 'assets/icon/wearning.svg';
-  static const chatBackground = 'assets/images/chat_bg.jfif';
+  static const chatBackground = 'assets/images/bg.jpg';
+  static const mainBg = 'assets/images/main.png';
 
   ///////
-  // static const test1 = 'assets/image/p1.png';
   // static const test2 = 'assets/image/p2.png';
   // static const favIcon = 'assets/icon/heart.svg';
   // static const lockIcon = 'assets/icon/lock.svg';

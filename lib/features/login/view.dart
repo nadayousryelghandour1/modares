@@ -85,7 +85,7 @@ class Login extends StatelessWidget {
                           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.85,
-                            height: MediaQuery.of(context).size.height * 0.65,
+                            height: MediaQuery.of(context).size.height * 0.85,
                             alignment: Alignment.center,
                             color: Colors.black.withOpacity(0.02),
                             child: Padding(

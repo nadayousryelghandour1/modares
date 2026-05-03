@@ -1,12 +1,12 @@
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:modares/bloc/profile/profile_bloc.dart';
+import 'package:modares/bloc/teacher/teacher_bloc.dart';
 import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:flutter/material.dart';
-import 'package:modares/core/resources/background.dart';
 import 'package:modares/features/Profile/view.dart';
 import 'package:modares/features/all_chats/view.dart';
 import 'package:modares/features/home/view.dart';
@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     indexing = widget.initialIndex;
+    getIt<TeacherBloc>().add(GetBestTeachers(count: 5));
     super.initState();
   }
 
@@ -35,6 +36,10 @@ class _HomeState extends State<Home> {
     setState(() {
       indexing = index;
     });
+
+    if (index == 0) {
+      getIt<TeacherBloc>().add(GetBestTeachers(count: 5));
+    }
 
     if (index == 1) {
       getIt<TeacherSearchBloc>().add(ApplyFilters());
@@ -107,7 +112,7 @@ class _HomeState extends State<Home> {
           CurvedNavigationBarItem(
             child: SvgPicture.asset(
               AppImage.chatIcon,
-             colorFilter: ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                 indexing == 3 ? AppColor.primeryColor : AppColor.mainWhite,
                 BlendMode.srcIn,
               ),
@@ -122,7 +127,10 @@ class _HomeState extends State<Home> {
 
       body: Stack(
         children: [
-          Positioned.fill(child: MudarrisBackground()),
+          Positioned.fill(child: Image.asset(
+            AppImage.mainBg,
+            fit: BoxFit.cover,
+          )),
           screens[indexing],
         ],
       ), // Show selected page

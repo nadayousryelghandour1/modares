@@ -5,8 +5,8 @@ class TodoModel {
   final bool isDone;
   final String deviceId;
   final DateTime createdAt;
-  final DateTime? dueDate;      
-  final Duration? timeout;      
+  final DateTime? dueDate;    
+  final Duration? timeout;     
 
   TodoModel({
     required this.id,

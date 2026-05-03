@@ -97,15 +97,12 @@ class SearchItem extends StatelessWidget {
                 children: [
                   Text(teacher.name, style: AppTextStyle.primaryStyle),
                   Expanded(
-                    child: Row(
-                      children: teacher.subjects!.asMap().entries.map((entry) {
-                        final isLast = entry.key == teacher.subjects!.length - 1;
-
-                        return Text(
-                          isLast ? entry.value : "${entry.value} • ",
-                          style: AppTextStyle.secondaryStyle,
-                        );
-                      }).toList(),
+                    child: Text(
+                      teacher.subjects!.join(" • "),
+                      style: AppTextStyle.secondaryStyle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
                     ),
                   ),
 

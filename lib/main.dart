@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:modares/core/network/service_locator.dart';
+import 'package:modares/core/network/services/notification_service.dart';
 import 'package:modares/features/splash/view.dart';
 import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/provider/lang_provider.dart';
@@ -10,12 +11,12 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // DioHzz.initDio();
   setupServiceLocator();
   final localeProvider = LocaleProvider();
   await localeProvider.loadLocale();
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.init();                    // أضيف السطر ده
+  await NotificationService.requestAndroidPermission(); // وده
 
   runApp(
     ChangeNotifierProvider(create: (_) => localeProvider, child: const MyApp()),

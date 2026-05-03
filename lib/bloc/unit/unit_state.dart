@@ -4,7 +4,7 @@ class UnitState {}
 
 class UnitInitial extends UnitState {}
 
-class UnitLoading extends UnitState  {}
+class UnitsLoading extends UnitState  {}
 
 class GetUnitsSuccess extends UnitState {
   final Map<int, Map<int, List<UnitModel>>> units;
@@ -18,6 +18,22 @@ final class GetUnitsFailure extends UnitState {
   final String? message;
 
   GetUnitsFailure({required this.errors, this.message});
+}
+
+class UnitDetailsLoading extends UnitState  {}
+
+class GetUnitDetailsSuccess extends UnitState {
+  final List<Map<int, Map<int, List<UnitModel>>>> units;
+
+  GetUnitDetailsSuccess({required this.units});
+
+}
+
+final class GetUnitDetailsFailure extends UnitState {
+  final dynamic errors;
+  final String? message;
+
+  GetUnitDetailsFailure({required this.errors, this.message});
 }
 
 // class LecturesLoading extends UnitState  {}

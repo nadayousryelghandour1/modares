@@ -30,21 +30,26 @@ class TeacherBloc extends Bloc<TeacherEvent, TeacherState> {
     });
 
     on<GetBestTeachers>((event, emit) async {
-      emit(BeatTeachersLoading());
-      try {
-        final response = await api.get(EndPoints.getBestTeachers);
-        final List<TeacherModel> teachers = (response['data'] as List)
-            .map((e) => TeacherModel.fromJson(e as Map<String, dynamic>))
-            .toList();
-        emit(BestTeachersLoadSuccess(teachers: teachers));
-      } on ServerException catch (e) {
-        emit(
-          BestTeachersLoadFailure(
-            errors: e.errorModel.errors,
-            message: e.errorModel.message,
-          ),
-        );
-      }
-    });
+  emit(BeatTeachersLoading());
+  try {
+    final response = await api.get(EndPoints.getBestTeachers);
+    
+    final Map<String, dynamic> dataMap = response['data'] as Map<String, dynamic>;
+    
+    final List<TeacherModel> teachers = dataMap.values
+        .expand((list) => (list as List))
+        .map((e) => TeacherModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+    
+    emit(BestTeachersLoadSuccess(teachers: teachers));
+  } on ServerException catch (e) {
+    emit(
+      BestTeachersLoadFailure(
+        errors: e.errorModel.errors,
+        message: e.errorModel.message,
+      ),
+    );
+  }
+});
   }
 }

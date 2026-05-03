@@ -14,7 +14,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
   @override
   UnitBloc() : api = getIt<ApiConsumer>(), super(UnitInitial()) {
     on<GetTeacherUnitsEvent>((event, emit) async {
-      emit(UnitLoading());
+      emit(UnitsLoading());
       try {
         final response = await api.get(
           EndPoints.getTeacherUnits,

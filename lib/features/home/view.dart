@@ -1,20 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:modares/core/resources/app_color.dart';
-import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_subjects.dart';
 import 'package:modares/core/resources/app_text_style.dart';
-import 'package:modares/features/widget/containue.dart';
+import 'package:modares/core/resources/cache_helper.dart';
+import 'package:modares/features/widget/best_teachers.dart';
 import 'package:modares/features/widget/home_banner.dart';
 import 'package:modares/features/widget/subject_card.dart';
 import 'package:modares/features/widget/todo_bar.dart';
 import 'package:modares/l10n/app_localizations.dart';
+import 'package:modares/model/user_model.dart';
+import 'package:shimmer/shimmer.dart';
 
-class StudentHome extends StatelessWidget {
+class StudentHome extends StatefulWidget {
   const StudentHome({super.key});
 
   @override
+  State<StudentHome> createState() => _StudentHomeState();
+}
+
+class _StudentHomeState extends State<StudentHome> {
+  UserModel? user;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    user = await CacheHelper.getUser();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading || user == null) {
+      return const StudentHomeShimmer();
+    }
+    final filterStage = filteredStages(user!.gradeId);
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
@@ -22,40 +48,48 @@ class StudentHome extends StatelessWidget {
         elevation: 0,
         forceMaterialTransparency: true,
         scrolledUnderElevation: 0,
-        title: Container(
-          height: 45,
-          width: 45,
-          decoration: BoxDecoration(
-            color: AppColor.primeryColor,
-            borderRadius: BorderRadius.circular(15),
+        title: Expanded(
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColor.primeryColor,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Center(
+              child: Text(
+                "مُ",
+                style: TextStyle(fontSize: 16, color: Colors.white , fontFamily: "Cairo", fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
-          child: Text(AppLocalizations.of(context)!.logo),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications, size: 30),
+            icon: const Icon(Icons.notifications, size: 30),
           ),
-
           Container(
-            width: 45,
-            height: 45,
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: AppColor.primeryColor,
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
+  margin: const EdgeInsets.symmetric(horizontal: 16),
+  child: CircleAvatar(
+    radius: 22.5,
+    backgroundImage: NetworkImage(
+      user!.image ??
+          "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+    ),
+  ),
+)
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 20,
             children: [
-              HomeBanner(),
+              const HomeBanner(),
+              const SizedBox(height: 20),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
@@ -64,107 +98,99 @@ class StudentHome extends StatelessWidget {
                 ),
               ),
 
+              const SizedBox(height: 20),
+
               SizedBox(
                 height: 150,
                 child: ListView.builder(
-                  itemCount: filteredStages.subjects.length,
+                  itemCount: filterStage.subjects.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return SubjectCard(subject: filteredStages.subjects[index]);
+                    return SubjectCard(subject: filterStage.subjects[index]);
                   },
                 ),
               ),
 
+              const SizedBox(height: 20),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.units,
-                      style: AppTextStyle.primaryStyle.copyWith(fontSize: 18),
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.seeAll,
-                      style: AppTextStyle.primaryStyle.copyWith(fontSize: 18),
-                    ),
-                  ],
+                child: Text(
+                  "مدرسون مميزون",
+                  style: AppTextStyle.primaryStyle.copyWith(fontSize: 18),
                 ),
               ),
-              Containue(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Column(
-                  children: [
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(100),
-                          child: CircleAvatar(
-                            radius: 50,
-                            child: Image.network(
-                              "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                            child: Container(
-                              width: 60,
-                              height: 24,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 2,
-                                vertical: 3,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColor.mainGold,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                spacing: 3,
-                                children: [
-                                  Text(
-                                    'rate',
-                                    style: AppTextStyle.primaryStyle.copyWith(
-                                      fontSize: 14,
-                                      fontFamily: "Sans",
-                                    ),
-                                  ),
-                                  SvgPicture.asset(
-                                    AppImage.starIcon,
-                                    width: 15,
-                                    height: 15,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "name",
-                      style: AppTextStyle.primaryStyle.copyWith(fontSize: 18),
-                    ),
-                    Text(
-                      "sub",
-                      style: AppTextStyle.secondaryStyle.copyWith(fontSize: 18),
-                    ),
-                  ],
+
+              const SizedBox(height: 20),
+
+              const BestTeachers(),
+
+              const SizedBox(height: 20),
+
+              const SizedBox(height: 280, child: TodoBar()),
+
+              const SizedBox(height: 100),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class StudentHomeShimmer extends StatelessWidget {
+  const StudentHomeShimmer({super.key});
+
+  Widget shimmerBox({
+    double? width,
+    double? height,
+    BorderRadius? borderRadius,
+  }) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: borderRadius ?? BorderRadius.circular(12),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              shimmerBox(width: double.infinity, height: 180),
+
+              const SizedBox(height: 20),
+
+              shimmerBox(width: 150, height: 25),
+
+              const SizedBox(height: 20),
+
+              SizedBox(
+                height: 150,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, __) => shimmerBox(width: 120, height: 150),
+                  separatorBuilder: (_, __) => const SizedBox(width: 10),
+                  itemCount: 4,
                 ),
               ),
-              TodoBar(),
-              SizedBox(height: 100),
+
+              const SizedBox(height: 20),
+
+              shimmerBox(width: 180, height: 25),
+
+              const SizedBox(height: 20),
+
+              shimmerBox(width: double.infinity, height: 220),
             ],
           ),
         ),

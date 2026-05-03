@@ -118,7 +118,7 @@ class _ChatPageState extends State<ChatPage> {
               height: double.infinity,
               width: double.infinity,
               color: Colors.white,
-              // child: Image.asset(AppImage.chatBackground, fit: BoxFit.cover),
+              child: Image.asset(AppImage.chatBackground, fit: BoxFit.cover),
             ),
           ),
           Column(
@@ -192,7 +192,7 @@ class _ChatPageState extends State<ChatPage> {
           tail: true,
           textStyle: TextStyle(
             color: isMe ? Colors.white : Colors.black87,
-            fontSize: 16,
+            fontSize: 20,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w500
           ),

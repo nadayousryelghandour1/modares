@@ -13,6 +13,7 @@ import 'package:modares/core/resources/snack_bar.dart';
 import 'package:modares/features/Profile/skeleton.dart';
 import 'package:modares/features/login/view.dart';
 import 'package:modares/features/widget/profile_form.dart';
+import 'package:modares/features/widget/quiz_result_table.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -52,6 +53,7 @@ class Profile extends StatelessWidget {
               );
             } else if (state is LogoutSuccess ||
                 state is AccountDeleteSuccess) {
+                  
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => Login()),
@@ -68,6 +70,7 @@ class Profile extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is ProfileSuccess) {
+              // print("=========================================%{state.profile[]}")ك
               return Stack(
                 children: [
                   Container(
@@ -205,7 +208,7 @@ class Profile extends StatelessWidget {
                                         profile: state.profile,
                                       ),
                                     ),
-                                    Container(color: Colors.blue),
+                                    QuizzesTable(quizzes: state.profile.quizResults ?? []),
                                   ],
                                 ),
                               ),

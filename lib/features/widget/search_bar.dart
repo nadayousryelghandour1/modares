@@ -4,8 +4,11 @@ import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_subjects.dart';
+import 'package:modares/core/resources/cache_helper.dart';
+import 'package:modares/features/search/skeleton_main.dart';
 import 'package:modares/l10n/app_localizations.dart';
 import 'package:modares/model/subject_model.dart';
+import 'package:modares/model/user_model.dart';
 
 // ignore: must_be_immutable
 class CustomSearchBar extends StatefulWidget {
@@ -16,11 +19,31 @@ class CustomSearchBar extends StatefulWidget {
 }
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
-  List<SubjectModel> choices = filteredStages.subjects;
   int? indexActive;
+  UserModel? user;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    user = await CacheHelper.getUser();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+
+    if (isLoading || user == null) {
+      return Expanded(child: TeachersPageSkeleton());
+    }
+    List<SubjectModel> choices = filteredStages(user!.gradeId).subjects;
 
     return BlocConsumer<TeacherSearchBloc, TeacherSearchState>(
       bloc: getIt<TeacherSearchBloc>(),
