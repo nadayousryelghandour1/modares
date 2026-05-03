@@ -183,12 +183,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seeAll => 'See all';
 
   @override
-  String get searchTeacherNameHint => 'Search by Teacher Name';
-
-  @override
-  String get noMatchFound => 'Sorry No Match Found';
-
-  @override
   String welcomeHeaderTitle(Object name) {
     return 'Welcome, $name';
   }
@@ -384,4 +378,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileButton => 'Profile';
+
+  @override
+  String get searchTeacherNameHint => 'Search by Teacher Name';
+
+  @override
+  String get noMatchFound => 'Sorry No Match Found';
+
+  @override
+  String get teacher_about => 'About Teacher';
+
+  @override
+  String get lesson_lists => 'Lesson Lists';
+
+  @override
+  String get comments => 'Comments';
+
+  @override
+  String get unexpected_error => 'Unexpected Error Occurred';
 }

@@ -183,12 +183,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get seeAll => 'عرض الكل';
 
   @override
-  String get searchTeacherNameHint => 'ابحث باسم المدرس';
-
-  @override
-  String get noMatchFound => 'عذرًا، لم يتم العثور على نتائج';
-
-  @override
   String welcomeHeaderTitle(Object name) {
     return 'أهلًا بك يا $name';
   }
@@ -384,4 +378,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileButton => 'الملف الشخصي';
+
+  @override
+  String get searchTeacherNameHint => 'ابحث باسم المدرس';
+
+  @override
+  String get noMatchFound => 'عذرًا، لم يتم العثور على نتائج';
+
+  @override
+  String get teacher_about => 'عن المدرس';
+
+  @override
+  String get lesson_lists => 'قوائم الدروس';
+
+  @override
+  String get comments => 'التعليقات';
+
+  @override
+  String get unexpected_error => 'حدث خطأ غير متوقع';
 }

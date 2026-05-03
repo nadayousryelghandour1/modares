@@ -20,12 +20,13 @@ final class GetUnitsFailure extends UnitState {
   GetUnitsFailure({required this.errors, this.message});
 }
 
+
 class UnitDetailsLoading extends UnitState  {}
 
 class GetUnitDetailsSuccess extends UnitState {
-  final List<Map<int, Map<int, List<UnitModel>>>> units;
+  final List<LectureModel> lectures;
 
-  GetUnitDetailsSuccess({required this.units});
+  GetUnitDetailsSuccess({required this.lectures});
 
 }
 
@@ -36,20 +37,7 @@ final class GetUnitDetailsFailure extends UnitState {
   GetUnitDetailsFailure({required this.errors, this.message});
 }
 
-// class LecturesLoading extends UnitState  {}
 
-// class GetLecturesSuccess extends UnitState {
-//   final List<UnitModel> units;
-
-//   GetUnitsSuccess({required this.units});
-
-// }
-// final class ProfileEditFailure extends ProfileState {
-//   final dynamic errors;
-//   final String? message;
-
-//   ProfileEditFailure({required this.errors, this.message});
-// }
 
 // final class ProfileImageEditFailure extends ProfileState {
 //   final dynamic errors;

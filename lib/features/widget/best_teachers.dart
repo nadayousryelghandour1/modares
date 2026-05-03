@@ -34,6 +34,7 @@ class BestTeachers extends StatelessWidget {
               itemCount: state.teachers.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
+                  width: 200,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
@@ -62,7 +63,7 @@ class BestTeachers extends StatelessWidget {
                                       fit: BoxFit.fill,
                                       errorBuilder: (_, __, ___) => Image.network(
                                         "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                       ),
                                     )
                                   : state.teachers[index].image != null
@@ -73,11 +74,11 @@ class BestTeachers extends StatelessWidget {
                                           '',
                                         ),
                                       ),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     )
                                   : Image.network(
                                       "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                             ),
                           ),

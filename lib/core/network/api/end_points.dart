@@ -12,6 +12,9 @@ class EndPoints {
   static const String verifyOtp = '/auth/verify-otp';
   static const String changePassword = '/auth/change-password';
   static const String daleteAccount = '/student';
+  static const String unitDetails =
+      '/lecture/lectures-by-unit-id-and-student-id';
+  static const String payment = 'https://modares.runasp.net/payment/checkout';
 
   // static const String confirmEmailResand = '/Auth/resend-confirmation-email';
   // static const String refreshToken = '/Auth/refresh' ;
@@ -37,7 +40,6 @@ class ApiKey {
   static String message = 'message';
   static String email = 'Email';
   static String forgetEmail = 'email';
-
   static String password = 'Password';
   static String name = 'Name';
   static String phoneNumber = 'PhoneNumber';
@@ -56,6 +58,8 @@ class ApiKey {
   static String isProfileImage = 'isProfileImage';
   static String teacherId = 'teacherId';
   static String code = 'code';
+  static String unitId = 'unitId';
+  static String studentId = 'studentId';
 
   // static String confirmPassword = 'confirmPassword';
   // static String firstName = 'firstName';

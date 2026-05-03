@@ -1,8 +1,21 @@
 part of 'payment_bloc.dart';
 
-abstract class PaymentEvent extends Equatable {
-  const PaymentEvent();
+abstract class PaymentEvent {}
 
-  @override
-  List<Object> get props => [];
+class InitiatePaymentEvent extends PaymentEvent {
+  final String method;
+  final int integrationId;
+  final String courseTitle;
+  final int courseId;
+  final double price;
+  final int studentId;
+
+  InitiatePaymentEvent({
+    required this.method,
+    required this.integrationId,
+    required this.courseTitle,
+    required this.courseId,
+    required this.price,
+    required this.studentId,
+  });
 }

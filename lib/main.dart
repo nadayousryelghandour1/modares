@@ -15,8 +15,8 @@ void main() async {
   final localeProvider = LocaleProvider();
   await localeProvider.loadLocale();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await NotificationService.init();                    // أضيف السطر ده
-  await NotificationService.requestAndroidPermission(); // وده
+  await NotificationService.init();
+  await NotificationService.requestAndroidPermission();
 
   runApp(
     ChangeNotifierProvider(create: (_) => localeProvider, child: const MyApp()),

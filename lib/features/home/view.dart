@@ -5,6 +5,7 @@ import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/cache_helper.dart';
 import 'package:modares/features/widget/best_teachers.dart';
 import 'package:modares/features/widget/home_banner.dart';
+import 'package:modares/features/widget/notification.dart';
 import 'package:modares/features/widget/subject_card.dart';
 import 'package:modares/features/widget/todo_bar.dart';
 import 'package:modares/l10n/app_localizations.dart';
@@ -48,37 +49,45 @@ class _StudentHomeState extends State<StudentHome> {
         elevation: 0,
         forceMaterialTransparency: true,
         scrolledUnderElevation: 0,
-        title: Expanded(
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppColor.primeryColor,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: const Center(
-              child: Text(
-                "مُ",
-                style: TextStyle(fontSize: 16, color: Colors.white , fontFamily: "Cairo", fontWeight: FontWeight.bold),
+        title: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: AppColor.primeryColor,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Center(
+            child: Text(
+              "مُ",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const NotificationPage()),
+              );
+            },
             icon: const Icon(Icons.notifications, size: 30),
           ),
           Container(
-  margin: const EdgeInsets.symmetric(horizontal: 16),
-  child: CircleAvatar(
-    radius: 22.5,
-    backgroundImage: NetworkImage(
-      user!.image ??
-          "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-    ),
-  ),
-)
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            child: CircleAvatar(
+              radius: 22.5,
+              backgroundImage: NetworkImage(
+                user!.image ??
+                    "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+              ),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(

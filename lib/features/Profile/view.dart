@@ -12,8 +12,10 @@ import 'package:modares/core/resources/log_out_sheet.dart';
 import 'package:modares/core/resources/snack_bar.dart';
 import 'package:modares/features/Profile/skeleton.dart';
 import 'package:modares/features/login/view.dart';
+import 'package:modares/features/widget/language_switcher.dart';
 import 'package:modares/features/widget/profile_form.dart';
 import 'package:modares/features/widget/quiz_result_table.dart';
+import 'package:modares/provider/lang_provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -53,7 +55,6 @@ class Profile extends StatelessWidget {
               );
             } else if (state is LogoutSuccess ||
                 state is AccountDeleteSuccess) {
-                  
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => Login()),
@@ -135,6 +136,21 @@ class Profile extends StatelessWidget {
                               ),
                             ),
                           ),
+                          PopupMenuItem(
+                            child: LanguageSwitcher(
+                              lang: Localizations.localeOf(
+                                context,
+                              ).languageCode.toUpperCase(),
+                              onTap: () {
+                                final provider = context.read<LocaleProvider>();
+                                final currentLang =
+                                    provider.locale.languageCode;
+                                provider.changeLocale(
+                                  currentLang == 'ar' ? 'en' : 'ar',
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -146,7 +162,7 @@ class Profile extends StatelessWidget {
                       height:
                           MediaQuery.of(context).size.height +
                           MediaQuery.of(context).viewInsets.bottom -
-                          180,
+                          160,
                       padding: EdgeInsets.only(top: 78),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
@@ -177,13 +193,13 @@ class Profile extends StatelessWidget {
                               indicatorColor: AppColor.primeryColor,
                               labelColor: AppColor.primeryColor,
                               labelStyle: TextStyle(
-                                fontSize: 19,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "Cairo",
                               ),
                               unselectedLabelColor: AppColor.primaryTextColor,
                               unselectedLabelStyle: TextStyle(
-                                fontSize: 19,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "Cairo",
                               ),
@@ -208,7 +224,9 @@ class Profile extends StatelessWidget {
                                         profile: state.profile,
                                       ),
                                     ),
-                                    QuizzesTable(quizzes: state.profile.quizResults ?? []),
+                                    QuizzesTable(
+                                      quizzes: state.profile.quizResults ?? [],
+                                    ),
                                   ],
                                 ),
                               ),
@@ -219,7 +237,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.080,
+                    top: MediaQuery.of(context).size.height * 0.1,
                     left: 0,
                     right: 0,
                     child: Center(
@@ -235,8 +253,8 @@ class Profile extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(80),
                               child: Container(
-                                width: 160,
-                                height: 160,
+                                width: 130,
+                                height: 130,
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),

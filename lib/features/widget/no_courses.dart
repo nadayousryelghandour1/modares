@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modares/core/resources/app_button.dart';
+import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/features/bottom_nav_bar/view.dart';
@@ -13,8 +14,16 @@ class NoCourses extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
+
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios_new_outlined, color: AppColor.mainGray,),
+      ),
       body: Stack(
         children: [
+          Positioned.fill(child: Image.asset(
+            AppImage.mainBg,
+            fit: BoxFit.cover,
+          )),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
             child: Column(

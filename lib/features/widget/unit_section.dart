@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modares/bloc/lecture_bloc.dart';
 import 'package:modares/bloc/unit/unit_bloc.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_error_page.dart';
 import 'package:modares/core/resources/app_subjects.dart';
 import 'package:modares/core/resources/app_text_style.dart';
+import 'package:modares/features/course_details/view.dart';
 import 'package:modares/features/teacher_details/skeleton2.dart';
 import 'package:modares/features/widget/unit_card.dart';
 import 'package:modares/l10n/app_localizations.dart';
+import 'package:modares/model/unit_model.dart';
 
 class UnitsSection extends StatefulWidget {
   final int teacherId;
@@ -22,6 +25,7 @@ class UnitsSection extends StatefulWidget {
 class _UnitsSectionState extends State<UnitsSection> {
   Map<dynamic, dynamic> selectedSubject = {};
   Map<dynamic, dynamic> selectedUnits = {};
+  final LectureBloc blocLec = getIt<LectureBloc>();
   final UnitBloc bloc = getIt<UnitBloc>();
 
   @override
@@ -149,7 +153,7 @@ class _UnitsSectionState extends State<UnitsSection> {
                           scrollDirection: Axis.horizontal,
                           itemCount: selectedUnits[gradeId].length,
                           itemBuilder: (context, index) {
-                            final unit = selectedUnits[gradeId][index];
+                            final UnitModel unit = selectedUnits[gradeId][index];
 
                             return Container(
                               width: 280,
@@ -157,10 +161,17 @@ class _UnitsSectionState extends State<UnitsSection> {
                               child: UnitCard(
                                 unit: unit,
                                 onTap: () {
-                                  /// Bloc event هنا
-                                  /// context.read<LectureBloc>().add(
-                                  ///   GetLectureByUnitId(unit['id']),
-                                  /// );
+                                  blocLec.add(
+                                    GetUnitDetailsEvent(unitId: unit.id),
+                                  );
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => UnitDetailsPage(
+                                        unitId: unit.id,
+                                        unitName: unit.name,
+                                      ),
+                                    ),
+                                  );
                                 },
                               ),
                             );

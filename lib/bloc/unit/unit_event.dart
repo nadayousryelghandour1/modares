@@ -8,10 +8,3 @@ class GetTeacherUnitsEvent extends UnitEvent {
 
 }
 
-class GetLecturesByUnitIdEvent extends UnitEvent {
-  final int unitId;
-
-  GetLecturesByUnitIdEvent({required this.unitId});
-}
-
-class GetLecture extends UnitEvent {}

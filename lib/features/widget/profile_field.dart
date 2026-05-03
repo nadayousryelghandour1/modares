@@ -25,7 +25,7 @@ class ProfileField extends StatelessWidget {
           title,
           style: TextStyle(
             fontFamily: 'Cairo',
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             color: AppColor.primaryTextColor,
           ),
@@ -38,7 +38,7 @@ class ProfileField extends StatelessWidget {
           keyboardType: keyboard ?? TextInputType.name,
           style: TextStyle(
             fontFamily: 'Cairo',
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.w400,
             color: AppColor.primaryTextColor,
           ),

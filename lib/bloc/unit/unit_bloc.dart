@@ -1,9 +1,9 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:modares/core/network/api/api_consumer.dart';
 import 'package:modares/core/network/api/end_points.dart';
 import 'package:modares/core/network/errors/exception.dart';
 import 'package:modares/core/network/service_locator.dart';
+import 'package:modares/model/lecture.dart';
 import 'package:modares/model/unit_model.dart';
 
 part 'unit_event.dart';
@@ -32,5 +32,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
         );
       }
     });
+
+
   }
 }

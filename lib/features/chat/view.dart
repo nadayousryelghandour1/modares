@@ -180,8 +180,8 @@ class _ChatPageState extends State<ChatPage> {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: isMe
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.end,
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
         BubbleSpecialThree(
           text: msg.text,
@@ -192,7 +192,7 @@ class _ChatPageState extends State<ChatPage> {
           tail: true,
           textStyle: TextStyle(
             color: isMe ? Colors.white : Colors.black87,
-            fontSize: 20,
+            fontSize: 16,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w500
           ),

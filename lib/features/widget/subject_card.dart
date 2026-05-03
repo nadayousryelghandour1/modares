@@ -17,16 +17,16 @@ class SubjectCard extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(builder: (context)=>NoCourses()));
       },
       child: SizedBox(
-        width: 130,
-        height: 130,
+        width: 100,
+        height: 100,
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Container(
-                width: 88,
-                height: 88,
-                padding: EdgeInsets.all(2),
+                width: 78,
+                height: 78,
+                padding: EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   color: Color.lerp(subject.color, Colors.white, 0.85)!,
                   borderRadius: BorderRadius.circular(12),

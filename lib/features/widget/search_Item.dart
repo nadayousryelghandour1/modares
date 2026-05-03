@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modares/bloc/teacher/teacher_bloc.dart';
@@ -49,11 +51,31 @@ class SearchItem extends StatelessWidget {
                   borderRadius: BorderRadiusGeometry.circular(100),
                   child: CircleAvatar(
                     radius: 50,
-                    child: Image.network(
-                      teacher.image ??
-                          "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
-                      fit: BoxFit.fill,
-                    ),
+                    child:
+                        teacher.image != null &&
+                            teacher.image!.startsWith('http')
+                        ? Image.network(
+                            teacher.image!,
+                            fit: BoxFit.fill,
+                            errorBuilder: (_, __, ___) => Image.network(
+                              "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : teacher.image != null
+                        ? Image.memory(
+                            base64Decode(
+                              teacher.image!.replaceAll(
+                                RegExp(r'data:image/[^;]+;base64,'),
+                                '',
+                              ),
+                            ),
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            "https://i.pinimg.com/736x/d6/39/e0/d639e0e564e4a107d03543542900db7c.jpg",
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Positioned(
@@ -95,7 +117,16 @@ class SearchItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 spacing: 5,
                 children: [
-                  Text(teacher.name, style: AppTextStyle.primaryStyle),
+                  SizedBox(
+                    height: 30,
+                    child: Text(
+                      teacher.name,
+                      style: AppTextStyle.primaryStyle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false, 
+                    ),
+                  ),
                   Expanded(
                     child: Text(
                       teacher.subjects!.join(" • "),

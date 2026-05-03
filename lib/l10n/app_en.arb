@@ -123,5 +123,9 @@
   "apply": "Apply",
   "profileButton": "Profile",
   "searchTeacherNameHint": "Search by Teacher Name",
-  "noMatchFound": "Sorry No Match Found"
+  "noMatchFound": "Sorry No Match Found",
+   "teacher_about": "About Teacher",
+  "lesson_lists": "Lesson Lists",
+  "comments": "Comments",
+  "unexpected_error": "Unexpected Error Occurred"
 }

@@ -443,18 +443,6 @@ abstract class AppLocalizations {
   /// **'See all'**
   String get seeAll;
 
-  /// No description provided for @searchTeacherNameHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Search by Teacher Name'**
-  String get searchTeacherNameHint;
-
-  /// No description provided for @noMatchFound.
-  ///
-  /// In en, this message translates to:
-  /// **'Sorry No Match Found'**
-  String get noMatchFound;
-
   /// No description provided for @welcomeHeaderTitle.
   ///
   /// In en, this message translates to:
@@ -844,6 +832,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profileButton;
+
+  /// No description provided for @searchTeacherNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Teacher Name'**
+  String get searchTeacherNameHint;
+
+  /// No description provided for @noMatchFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry No Match Found'**
+  String get noMatchFound;
+
+  /// No description provided for @teacher_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About Teacher'**
+  String get teacher_about;
+
+  /// No description provided for @lesson_lists.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson Lists'**
+  String get lesson_lists;
+
+  /// No description provided for @comments.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get comments;
+
+  /// No description provided for @unexpected_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected Error Occurred'**
+  String get unexpected_error;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

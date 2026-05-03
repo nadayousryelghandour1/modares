@@ -8,7 +8,6 @@ class TeacherModel {
   final double rating;
   final int teachingMethod;
   final int? government;
-
   final String? phoneNumber;
   final String? email;
   final String? introVideoUrl;
@@ -16,6 +15,7 @@ class TeacherModel {
   final int? studentsCount;
   final List<dynamic>? subjects;
   final List<int>? subjectsIds;
+  final Map<String, List<String>>? availability;
 
   TeacherModel({
     required this.id,
@@ -34,6 +34,7 @@ class TeacherModel {
     this.studentsCount,
     this.subjects,
     this.subjectsIds,
+    this.availability,
   });
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) {
@@ -60,10 +61,15 @@ class TeacherModel {
           ?.map((e) => int.tryParse(e.toString()) ?? 0)
           .toList(),
       subjects: json['subjects'],
+      availability: (json['availability'] as Map<String, dynamic>?)?.map(
+        (key, value) => MapEntry(
+          key,
+          List<String>.from(value),
+        ),
+      ),
     );
   }
 }
-
 int _parseTeachingMethod(dynamic method) {
   switch (method.toString().toLowerCase()) {
     case "online":

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modares/core/network/service_locator.dart';
 import 'package:modares/core/network/services/chat.dart';
 import 'package:modares/core/resources/app_color.dart';
+import 'package:modares/core/resources/app_image.dart';
 import 'package:modares/core/resources/cache_helper.dart';
 import 'package:modares/features/chat/view.dart';
 import 'package:modares/model/user_model.dart';
@@ -40,11 +41,15 @@ class _ConversationsPageState extends State<ConversationsPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: AppColor.mainBackground,
         title: const Text(
           "المحادثات",
           style: TextStyle(fontFamily: "Cairo", fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        forceMaterialTransparency: true,
+        elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: StreamBuilder(
         stream: getIt<ChatService>().getConversations(_user!.email.toString()),
@@ -65,11 +70,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.chat_bubble_outline,
-                    size: 64,
-                    color: Colors.grey[300],
-                  ),
+                  Image.asset(AppImage.noConversations),
                   const SizedBox(height: 16),
                   Text(
                     "مفيش محادثات لحد دلوقتي",
@@ -92,7 +93,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
             ),
             itemBuilder: (context, index) {
               final data = docs[index].data() as Map<String, dynamic>;
-              print("===================================================================================================${ docs[index].data()}");
+ 
               return _ConversationItem(
                 data: data,
                 currentUserId: _user!.id.toString(),
@@ -153,72 +154,77 @@ class _ConversationItem extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: [
-            // صورة المدرس
-            CircleAvatar(
-              radius: 28,
-              backgroundColor: AppColor.primeryColor.withOpacity(0.1),
-              backgroundImage: teacherImage != null
-                  ? NetworkImage(teacherImage)
-                  : null,
-              child: teacherImage == null
-                  ? Text(
-                      teacherName[0],
-                      style: TextStyle(
-                        color: AppColor.primeryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    )
-                  : null,
-            ),
-
-            const SizedBox(width: 12),
-
-            // الاسم والمسج
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        teacherName,
-                        style: const TextStyle(
-                          fontFamily: "Cairo",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColor.mainWhite.withValues(alpha: 0.5),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            children: [
+              // صورة المدرس
+              CircleAvatar(
+                radius: 28,
+                backgroundColor: AppColor.primeryColor.withOpacity(0.1),
+                backgroundImage: teacherImage != null
+                    ? NetworkImage(teacherImage)
+                    : null,
+                child: teacherImage == null
+                    ? Text(
+                        teacherName[0],
+                        style: TextStyle(
+                          color: AppColor.primeryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                      ),
-                      Text(
-                        _formatTime(lastMessageMs),
-                        style: TextStyle(fontSize: 11, color: Colors.grey[500]),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    lastMessage.isEmpty
-                        ? "ابدأ المحادثة..."
-                        : isMe
-                        ? "أنت: $lastMessage"
-                        : lastMessage,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[600],
-                      fontFamily: "Cairo",
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                      )
+                    : null,
               ),
-            ),
-          ],
+        
+              const SizedBox(width: 12),
+        
+              // الاسم والمسج
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          teacherName,
+                          style: const TextStyle(
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          _formatTime(lastMessageMs),
+                          style: TextStyle(fontSize: 11, color: Colors.grey[500]),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      lastMessage.isEmpty
+                          ? "ابدأ المحادثة..."
+                          : isMe
+                          ? "أنت: $lastMessage"
+                          : lastMessage,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey[600],
+                        fontFamily: "Cairo",
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

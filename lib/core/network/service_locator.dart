@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:modares/bloc/auth/auth_bloc.dart';
 import 'package:modares/bloc/chat/chat_bloc.dart';
+import 'package:modares/bloc/lecture_bloc.dart';
+import 'package:modares/bloc/payment/payment_bloc.dart';
 import 'package:modares/bloc/profile/profile_bloc.dart';
 import 'package:modares/bloc/teacher/teacher_bloc.dart';
 import 'package:modares/bloc/teacher_search/teacher_search_bloc.dart';
@@ -67,5 +69,13 @@ void setupServiceLocator() {
 
   getIt.registerLazySingleton<UnitBloc>(
     () => UnitBloc(),
+  );
+
+  getIt.registerLazySingleton<LectureBloc>(
+    () => LectureBloc(),
+  );
+
+    getIt.registerLazySingleton<PaymentBloc>(
+    () => PaymentBloc(),
   );
 }

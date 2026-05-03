@@ -90,14 +90,14 @@ class TeacherDetails extends StatelessWidget {
                                   indicatorColor: AppColor.primeryColor,
                                   labelColor: AppColor.primeryColor,
                                   labelStyle: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: "Cairo",
                                   ),
                                   unselectedLabelColor:
                                       AppColor.primaryTextColor,
                                   unselectedLabelStyle: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: "Cairo",
                                   ),

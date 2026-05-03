@@ -7,6 +7,7 @@ import 'package:modares/core/resources/app_color.dart';
 import 'package:modares/core/resources/app_text_style.dart';
 import 'package:modares/core/resources/cache_helper.dart';
 import 'package:modares/features/chat/view.dart';
+import 'package:modares/features/widget/avaliability.dart';
 import 'package:modares/features/widget/profile_field.dart';
 import 'package:modares/features/widget/subject_section.dart';
 import 'package:modares/model/teacher_model.dart';
@@ -48,13 +49,13 @@ class _DetailsFormState extends State<DetailsForm> {
                         Text(
                           "الطلاب",
                           style: AppTextStyle.primaryStyle.copyWith(
-                            fontSize: 24,
+                            fontSize: 20,
                           ),
                         ),
                         Text(
                           "+${widget.profile.studentsCount}",
                           style: AppTextStyle.secondaryStyle.copyWith(
-                            fontSize: 24,
+                            fontSize: 20,
                             color: AppColor.secondaryColor,
                           ),
                         ),
@@ -65,13 +66,13 @@ class _DetailsFormState extends State<DetailsForm> {
                         Text(
                           "ساعات التدريس",
                           style: AppTextStyle.primaryStyle.copyWith(
-                            fontSize: 24,
+                            fontSize: 20,
                           ),
                         ),
                         Text(
                           "+${widget.profile.hoursOfTeaching}",
                           style: AppTextStyle.secondaryStyle.copyWith(
-                            fontSize: 24,
+                            fontSize: 20,
                             color: AppColor.secondaryColor,
                           ),
                         ),
@@ -98,10 +99,20 @@ class _DetailsFormState extends State<DetailsForm> {
             ),
             AppButton(
               text: "حجز درس مباشر",
-              onTap: () {},
-              widget: Icon(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BookLiveSession(
+                      teacherAvailability: widget.profile.availability ?? {},
+                      teacherName: widget.profile.name,
+                    ),
+                  ),
+                );
+              },
+              widget: const Icon(
                 Icons.calendar_month_outlined,
-                color: AppColor.mainWhite,
+                color: Colors.white,
               ),
             ),
             AppButton(
@@ -112,7 +123,7 @@ class _DetailsFormState extends State<DetailsForm> {
 
                 await getIt<ChatService>().createConversationIfNotExists(
                   currentUser: user,
-                  teacherEmail: widget.profile.email!, 
+                  teacherEmail: widget.profile.email!,
                   teacherName: widget.profile.name,
                   teacherImage: widget.profile.image,
                 );

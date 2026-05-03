@@ -79,7 +79,7 @@
   "welcome": "مرحبًا بعودتك، أيها الطالب",
   "desc": "رحلتك الأكاديمية مستمرة من هنا.",
   "subjects": "المواد الدراسية",
-  "units" : "الوحدات المستمرة",
+  "units": "الوحدات المستمرة",
   "governorate_cairo": "القاهرة",
   "governorate_alexandria": "الإسكندرية",
   "governorate_portSaid": "بورسعيد",
@@ -123,5 +123,9 @@
   "apply": "تطبيق",
   "profileButton": "الملف الشخصي",
   "searchTeacherNameHint": "ابحث باسم المدرس",
-  "noMatchFound": "عذرًا، لم يتم العثور على نتائج"
+  "noMatchFound": "عذرًا، لم يتم العثور على نتائج",
+  "teacher_about": "عن المدرس",
+  "lesson_lists": "قوائم الدروس",
+  "comments": "التعليقات",
+  "unexpected_error": "حدث خطأ غير متوقع"
 }
